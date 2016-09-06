@@ -89,7 +89,7 @@ public class Device {
             try {
                 DateFormat format = new SimpleDateFormat("y-M-D", Locale.getDefault());
                 Date pubDate = format.parse(device.getString("devicePublishDate"));
-                Date distDate = format.parse(device.getString("deviceCommDistributinoEndDate"));
+                Date distDate = format.parse(device.getString("deviceCommDistributionEndDate"));
 
                 publishDate = Calendar.getInstance();
                 commercialDistributionEndDate = (Calendar) publishDate.clone();
