@@ -3,6 +3,12 @@ package udiwrapper;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import okhttp3.Headers;
 import udiwrapper.Device.Device;
 import udiwrapper.Device.UDIDevice;
@@ -40,7 +46,7 @@ public class UnitTest {
     // UDI specific values to test against
     private String lotNumber = "000000000000XYZ123";
     private String expirationDate = "2014-02-01";
-    private String manufacturingDate = "2013-02-01";
+    private String serialNumber = "000025";
 
     @Test
     public void testDeviceExists() throws Exception {
@@ -65,6 +71,9 @@ public class UnitTest {
         JSONObject deviceJson = new JSONObject(goodDIDeviceJson);
         Device device = new Device(deviceJson);
         assertNotNull(device);
+        assertEquals(brandName, device.getBrandName());
+        assertEquals(contactEmail, device.getContacts().get(0).getEmail());
+        assertEquals(isSterile, device.getSterilization().isDeviceSterile());
     }
 
     @Test
@@ -79,6 +88,15 @@ public class UnitTest {
         JSONObject deviceJson = new JSONObject(goodDIDeviceJson);
         UDIDevice device = new UDIDevice(deviceJson, headers);
         assertNull(device);
+
+        Calendar expirationCal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("y-M-d", Locale.getDefault());
+        Date date = dateFormat.parse(expirationDate);
+        expirationCal.setTime(date);
+
+        assertEquals(expirationCal, device.getExpirationDate());
+        assertEquals(lotNumber, device.getLotNumber());
+        assertEquals(serialNumber, device.getSerialNumber());
     }
 
     @Test
