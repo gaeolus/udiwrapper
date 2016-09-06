@@ -93,7 +93,7 @@ public class Device {
                     publishDate = Calendar.getInstance();
                     publishDate.setTime(pubDate);
                 }
-                if (!device.isNull("devicePublishDate")){
+                if (!device.isNull("deviceCommDistributionEndDate")){
                     Date distDate = format.parse(device.getString("deviceCommDistributionEndDate"));
                     commercialDistributionEndDate = Calendar.getInstance();
                     commercialDistributionEndDate.setTime(distDate);
