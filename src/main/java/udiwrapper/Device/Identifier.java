@@ -16,7 +16,7 @@ public class Identifier {
     private String deviceIdIssuingAgency;
     private String containsDINumber;
     private String pkgStatus;
-    private int pkgQuantity;
+    private Integer pkgQuantity;
     private Calendar pkgDiscontinueDate;
 
     public Identifier(JSONObject identifierJson) throws JSONException, ParseException {
@@ -51,7 +51,7 @@ public class Identifier {
         return containsDINumber;
     }
 
-    public int getPkgQuantity() {
+    public Integer getPkgQuantity() {
         return pkgQuantity;
     }
 

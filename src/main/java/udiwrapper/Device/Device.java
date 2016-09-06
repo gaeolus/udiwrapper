@@ -31,7 +31,7 @@ public class Device {
     private boolean labeledNoNRL;
     private boolean requiresRX;
     private boolean isOTC;
-    private int deviceCount;
+    private Integer deviceCount;
     private String recordStatus;
     private String deviceDescription;
     private String MRISafetyStatus;
@@ -225,7 +225,7 @@ public class Device {
         return isOTC;
     }
 
-    public int getDeviceCount() {
+    public Integer getDeviceCount() {
         // TODO
         return deviceCount;
     }
