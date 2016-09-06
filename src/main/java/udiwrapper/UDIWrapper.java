@@ -1,7 +1,10 @@
 package udiwrapper;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -33,12 +36,45 @@ public class UDIWrapper {
     // fetch the Device information with a DI. Returns the Device if the DI is valid
     // and null if the DI doesn't exist
     public static Device fetchDIDevice(String DI){
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(DI_URL + DI)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200){
+                JSONObject responseJson = new JSONObject(response.body().string());
+                return new Device(responseJson);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return null;
     }
 
     // fetch the Device information with a DI. Returns the Device if the DI is valid
     // and null if the DI doesn't exist
     public static UDIDevice fetchUDIDevice(String UDI){
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(UDI_URL + UDI)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200){
+                JSONObject responseJson = new JSONObject(response.body().string());
+                Headers responseHeaders = response.headers();
+                return new UDIDevice(responseJson, responseHeaders);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return null;
     }
 
