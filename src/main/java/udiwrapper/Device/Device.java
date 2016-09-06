@@ -18,8 +18,8 @@ public class Device {
 
     private boolean isDMExempt;
     private boolean isPremarketExempt;
-    private boolean hasDeviceHCTP;
-    private boolean hasDeviceKit;
+    private boolean isDeviceHCTP;
+    private boolean isDeviceKit;
     private boolean isDeviceCombinationProduct;
     private boolean isSingleUse;
     private boolean hasLotBatch;
@@ -30,7 +30,7 @@ public class Device {
     private boolean labeledContainsNRL;
     private boolean labeledNoNRL;
     private boolean requiresRX;
-    private boolean requiresOTC;
+    private boolean isOTC;
     private int deviceCount;
     private String recordStatus;
     private String deviceDescription;
@@ -58,8 +58,8 @@ public class Device {
             // set the booleans first
             isDMExempt = device.getBoolean("DMExempt");
             isPremarketExempt = device.getBoolean("premarketExempt");
-            hasDeviceHCTP = device.getBoolean("deviceHCTP");
-            hasDeviceKit = device.getBoolean("deviceKit");
+            isDeviceHCTP = device.getBoolean("deviceHCTP");
+            isDeviceKit = device.getBoolean("deviceKit");
             isDeviceCombinationProduct = device.getBoolean("deviceCombinationProduct");
             isSingleUse = device.getBoolean("singleUse");
             hasLotBatch = device.getBoolean("lotBatch");
@@ -70,7 +70,7 @@ public class Device {
             labeledContainsNRL = device.getBoolean("labeledContainsNRL");
             labeledNoNRL = device.getBoolean("labeledNoNRL");
             requiresRX = device.getBoolean("rx");
-            requiresOTC = device.getBoolean("otc");
+            isOTC = device.getBoolean("otc");
 
             // get the ints
             deviceCount = device.getInt("deviceCount");
@@ -141,5 +141,169 @@ public class Device {
         } catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    // TODO verify that comments are accurate
+
+    public boolean isDMExempt() {
+        // whether the Device is exempt from affixing a UDI permanently on the device itself
+        return isDMExempt;
+    }
+
+    public boolean isPremarketExempt() {
+        // whether the Device is exempt from pre-market approval
+        return isPremarketExempt;
+    }
+
+    public boolean isDeviceHCTP() {
+        // whether the device is a Human Cellular and Tissue-based Product
+        return isDeviceHCTP;
+    }
+
+    public boolean isDeviceKit() {
+        // whether the device is a kit
+        return isDeviceKit;
+    }
+
+    public boolean isDeviceCombinationProduct() {
+        // whether or not the device is intended to be used in combination with other devices
+        return isDeviceCombinationProduct;
+    }
+
+    public boolean isSingleUse() {
+        // whether the device is single use
+        return isSingleUse;
+    }
+
+    public boolean hasLotBatch() {
+        // whether the device has a lot batch number
+        return hasLotBatch;
+    }
+
+    public boolean hasSerialNumber() {
+        // whether the device has a serial number
+        return hasSerialNumber;
+    }
+
+    public boolean hasManufacturingDate() {
+        // whether the device has a serial number
+        return hasManufacturingDate;
+    }
+
+    public boolean hasExpirationDate() {
+        // whether the device has an expiration date
+        return hasExpirationDate;
+    }
+
+    public boolean hasDonationIdNumber() {
+        // whether the device has a Donation ID number
+        return hasDonationIdNumber;
+    }
+
+    public boolean isLabeledContainsNRL() {
+        // whether the device contains Natural Rubber Latex
+        return labeledContainsNRL;
+    }
+
+    public boolean isLabeledNoNRL() {
+        // whether the device is labeled as not having Natural Rubber Latex
+        return labeledNoNRL;
+    }
+
+    public boolean requiresRX() {
+        // whether the device requires a prescription for use
+        return requiresRX;
+    }
+
+    public boolean isOTC() {
+        // whether the device is an Over-the-Counter product
+        return isOTC;
+    }
+
+    public int getDeviceCount() {
+        // TODO
+        return deviceCount;
+    }
+
+    public String getRecordStatus() {
+        // TODO
+        return recordStatus;
+    }
+
+    public String getDeviceDescription() {
+        // device description
+        return deviceDescription;
+    }
+
+    public String getMRISafetyStatus() {
+        // the MRI Safety Status of the device
+        return MRISafetyStatus;
+    }
+
+    public String getCommercialDistributionStatus() {
+        // the commercial distribution status of the device
+        return commercialDistributionStatus;
+    }
+
+    public String getBrandName() {
+        // the brand name of the device
+        return brandName;
+    }
+
+    public String getVersionModelNumber() {
+        // the version model number of the device
+        return versionModelNumber;
+    }
+
+    public String getCatalogNumber() {
+        // the catalog number of the device
+        return catalogNumber;
+    }
+
+    public String getCompanyName() {
+        // the name of the company that manufactures the device
+        return companyName;
+    }
+
+    public Calendar getPublishDate() {
+        // the date the device information was published
+        return publishDate;
+    }
+
+    public Calendar getCommercialDistributionEndDate() {
+        // the date that commercial distribution is set to end
+        return commercialDistributionEndDate;
+    }
+
+    public Sterilization getSterilization() {
+        // information regarding sterilization of the device
+        // See @Sterilization
+        return sterilization;
+    }
+
+    public Identifier getIdentifiers() {
+        // various identifiers of the device including the DI
+        return identifiers;
+    }
+
+    public ArrayList<Contact> getContacts() {
+        // a list contact information for the manufacturer of the device
+        return contacts;
+    }
+
+    public ArrayList<ProductCode> getProductCodes() {
+        // a list of the device's product codes
+        return productCodes;
+    }
+
+    public ArrayList<DeviceSize> getDeviceSizes() {
+        // a list of device sizes
+        return deviceSizes;
+    }
+
+    public ArrayList<EnvironmentalCondition> getEnvironmentalConditions() {
+        // a list of different environmental conditions for the device, such as storage handling
+        // or any other special environmental information
+        return environmentalConditions;
     }
 }
