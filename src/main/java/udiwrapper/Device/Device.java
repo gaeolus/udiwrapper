@@ -50,110 +50,101 @@ public class Device {
     private ArrayList<EnvironmentalCondition> environmentalConditions = new ArrayList<>();
 
     // All of the information about a Device is in the JSON response
-    public Device(JSONObject deviceJson){
-        try {
-            // get the relevant JSON object
-            JSONObject device = deviceJson.getJSONObject("gudid").getJSONObject("device");
+    public Device(JSONObject deviceJson) throws JSONException, ParseException {
+        // get the relevant JSON object
+        JSONObject device = deviceJson.getJSONObject("gudid").getJSONObject("device");
 
-            // set the booleans first
-            if (!device.isNull("DMExempt")) isDMExempt = device.getBoolean("DMExempt");
-            if (!device.isNull("premarketExempt")) isPremarketExempt = device.getBoolean("premarketExempt");
-            if (!device.isNull("deviceHCTP")) isDeviceHCTP = device.getBoolean("deviceHCTP");
-            if (!device.isNull("deviceKit")) isDeviceKit = device.getBoolean("deviceKit");
-            if (!device.isNull("deviceCombinationProduct")) isDeviceCombinationProduct = device.getBoolean("deviceCombinationProduct");
-            if (!device.isNull("singleUse")) isSingleUse = device.getBoolean("singleUse");
-            if (!device.isNull("lotBatch")) hasLotBatch = device.getBoolean("lotBatch");
-            if (!device.isNull("serialNumber")) hasSerialNumber = device.getBoolean("serialNumber");
-            if (!device.isNull("manufacturingDate")) hasManufacturingDate = device.getBoolean("manufacturingDate");
-            if (!device.isNull("expirationDate")) hasExpirationDate = device.getBoolean("expirationDate");
-            if (!device.isNull("donationIdNumber")) hasDonationIdNumber = device.getBoolean("donationIdNumber");
-            if (!device.isNull("labeledContainsNRL")) labeledContainsNRL = device.getBoolean("labeledContainsNRL");
-            if (!device.isNull("labeledNoNRL")) labeledNoNRL = device.getBoolean("labeledNoNRL");
-            if (!device.isNull("rx")) requiresRX = device.getBoolean("rx");
-            if (!device.isNull("otc")) isOTC = device.getBoolean("otc");
+        // set the booleans first
+        if (!device.isNull("DMExempt")) isDMExempt = device.getBoolean("DMExempt");
+        if (!device.isNull("premarketExempt")) isPremarketExempt = device.getBoolean("premarketExempt");
+        if (!device.isNull("deviceHCTP")) isDeviceHCTP = device.getBoolean("deviceHCTP");
+        if (!device.isNull("deviceKit")) isDeviceKit = device.getBoolean("deviceKit");
+        if (!device.isNull("deviceCombinationProduct")) isDeviceCombinationProduct = device.getBoolean("deviceCombinationProduct");
+        if (!device.isNull("singleUse")) isSingleUse = device.getBoolean("singleUse");
+        if (!device.isNull("lotBatch")) hasLotBatch = device.getBoolean("lotBatch");
+        if (!device.isNull("serialNumber")) hasSerialNumber = device.getBoolean("serialNumber");
+        if (!device.isNull("manufacturingDate")) hasManufacturingDate = device.getBoolean("manufacturingDate");
+        if (!device.isNull("expirationDate")) hasExpirationDate = device.getBoolean("expirationDate");
+        if (!device.isNull("donationIdNumber")) hasDonationIdNumber = device.getBoolean("donationIdNumber");
+        if (!device.isNull("labeledContainsNRL")) labeledContainsNRL = device.getBoolean("labeledContainsNRL");
+        if (!device.isNull("labeledNoNRL")) labeledNoNRL = device.getBoolean("labeledNoNRL");
+        if (!device.isNull("rx")) requiresRX = device.getBoolean("rx");
+        if (!device.isNull("otc")) isOTC = device.getBoolean("otc");
 
-            // get the ints
-            if (!device.isNull("deviceCount")) deviceCount = device.getInt("deviceCount");
+        // get the ints
+        if (!device.isNull("deviceCount")) deviceCount = device.getInt("deviceCount");
 
-            // get the strings
-            if (!device.isNull("deviceRecordStatus")) recordStatus = device.getString("deviceRecordStatus");
-            if (!device.isNull("deviceCommDistributionStatus")) commercialDistributionStatus = device.getString("deviceCommDistributionStatus");
-            if (!device.isNull("brandName")) brandName = device.getString("brandName");
-            if (!device.isNull("versionModelNumber")) versionModelNumber = device.getString("versionModelNumber");
-            if (!device.isNull("catalogNumber")) catalogNumber = device.getString("catalogNumber");
-            if (!device.isNull("companyName")) companyName = device.getString("companyName");
-            if (!device.isNull("deviceDescription")) deviceDescription = device.getString("deviceDescription");
-            if (!device.isNull("MRISafetyStatus")) MRISafetyStatus = device.getString("MRISafetyStatus");
+        // get the strings
+        if (!device.isNull("deviceRecordStatus")) recordStatus = device.getString("deviceRecordStatus");
+        if (!device.isNull("deviceCommDistributionStatus")) commercialDistributionStatus = device.getString("deviceCommDistributionStatus");
+        if (!device.isNull("brandName")) brandName = device.getString("brandName");
+        if (!device.isNull("versionModelNumber")) versionModelNumber = device.getString("versionModelNumber");
+        if (!device.isNull("catalogNumber")) catalogNumber = device.getString("catalogNumber");
+        if (!device.isNull("companyName")) companyName = device.getString("companyName");
+        if (!device.isNull("deviceDescription")) deviceDescription = device.getString("deviceDescription");
+        if (!device.isNull("MRISafetyStatus")) MRISafetyStatus = device.getString("MRISafetyStatus");
 
-            // turn the strings holding dates into Calendar Objects
-            try {
-                DateFormat format = new SimpleDateFormat("y-M-D", Locale.getDefault());
-                if (!device.isNull("devicePublishDate")){
-                    Date pubDate = format.parse(device.getString("devicePublishDate"));
-                    publishDate = Calendar.getInstance();
-                    publishDate.setTime(pubDate);
-                }
-                if (!device.isNull("deviceCommDistributionEndDate")){
-                    Date distDate = format.parse(device.getString("deviceCommDistributionEndDate"));
-                    commercialDistributionEndDate = Calendar.getInstance();
-                    commercialDistributionEndDate.setTime(distDate);
-                }
-            } catch (ParseException e){
-                e.printStackTrace();
+        // turn the strings holding dates into Calendar Objects
+        DateFormat format = new SimpleDateFormat("y-M-D", Locale.getDefault());
+        if (!device.isNull("devicePublishDate")){
+            Date pubDate = format.parse(device.getString("devicePublishDate"));
+            publishDate = Calendar.getInstance();
+            publishDate.setTime(pubDate);
+        }
+        if (!device.isNull("deviceCommDistributionEndDate")){
+            Date distDate = format.parse(device.getString("deviceCommDistributionEndDate"));
+            commercialDistributionEndDate = Calendar.getInstance();
+            commercialDistributionEndDate.setTime(distDate);
+        }
+
+        // set objects
+        if (!device.isNull("sterilization")) sterilization = new Sterilization(device.getJSONObject("sterilization"));
+        if (!device.isNull("identifiers")){
+            if (!device.getJSONObject("identifiers").isNull("identifier")) {
+                identifiers = new Identifier(device.getJSONObject("identifiers").getJSONObject("identifier"));
             }
+        }
 
-            // set objects
-            if (!device.isNull("sterilization")) sterilization = new Sterilization(device.getJSONObject("sterilization"));
-            if (!device.isNull("identifiers")){
-                if (!device.getJSONObject("identifiers").isNull("identifier")) {
-                    identifiers = new Identifier(device.getJSONObject("identifiers").getJSONObject("identifier"));
-                }
+        //create array lists with objects
+        if (!device.isNull("contacts")){
+            JSONObject contactsObject = device.getJSONObject("contacts");
+            Iterator<?> contactsKeys = contactsObject.keys();
+            while (contactsKeys.hasNext()){
+                String key = (String) contactsKeys.next();
+                Contact currentContact = new Contact(contactsObject.getJSONObject(key), key);
+                contacts.add(currentContact);
             }
+        }
 
-            //create array lists with objects
-            if (!device.isNull("contacts")){
-                JSONObject contactsObject = device.getJSONObject("contacts");
-                Iterator<?> contactsKeys = contactsObject.keys();
-                while (contactsKeys.hasNext()){
-                    String key = (String) contactsKeys.next();
-                    Contact currentContact = new Contact(contactsObject.getJSONObject(key), key);
-                    contacts.add(currentContact);
-                }
+        if (!device.isNull("productCodes")){
+            JSONObject productCodeObject = device.getJSONObject("productCodes");
+            Iterator<?> productCodeKeys = productCodeObject.keys();
+            while (productCodeKeys.hasNext()){
+                String key = (String) productCodeKeys.next();
+                ProductCode currentProductCode = new ProductCode(productCodeObject.getJSONObject(key), key);
+                productCodes.add(currentProductCode);
             }
+        }
 
-            if (!device.isNull("productCodes")){
-                JSONObject productCodeObject = device.getJSONObject("productCodes");
-                Iterator<?> productCodeKeys = productCodeObject.keys();
-                while (productCodeKeys.hasNext()){
-                    String key = (String) productCodeKeys.next();
-                    ProductCode currentProductCode = new ProductCode(productCodeObject.getJSONObject(key), key);
-                    productCodes.add(currentProductCode);
-                }
+        if (!device.isNull("deviceSizes")){
+            JSONObject deviceSizeObject = device.getJSONObject("deviceSizes");
+            Iterator<?> deviceSizeKeys = deviceSizeObject.keys();
+            while (deviceSizeKeys.hasNext()){
+                String key = (String) deviceSizeKeys.next();
+                DeviceSize currentDeviceSize = new DeviceSize(deviceSizeObject.getJSONObject(key), key);
+                deviceSizes.add(currentDeviceSize);
             }
+        }
 
-            if (!device.isNull("deviceSizes")){
-                JSONObject deviceSizeObject = device.getJSONObject("deviceSizes");
-                Iterator<?> deviceSizeKeys = deviceSizeObject.keys();
-                while (deviceSizeKeys.hasNext()){
-                    String key = (String) deviceSizeKeys.next();
-                    DeviceSize currentDeviceSize = new DeviceSize(deviceSizeObject.getJSONObject(key), key);
-                    deviceSizes.add(currentDeviceSize);
-                }
+        if (!device.isNull("environmentalConditions")){
+            JSONObject environmentalConditionsObject = device.getJSONObject("environmentalConditions");
+            Iterator<?> environmentalConditionKeys = environmentalConditionsObject.keys();
+            while (environmentalConditionKeys.hasNext()){
+                String key = (String) environmentalConditionKeys.next();
+                EnvironmentalCondition currentEnvironmentalCondition =
+                        new EnvironmentalCondition(environmentalConditionsObject.getJSONArray(key), key);
+                environmentalConditions.add(currentEnvironmentalCondition);
             }
-
-            if (!device.isNull("environmentalConditions")){
-                JSONObject environmentalConditionsObject = device.getJSONObject("environmentalConditions");
-                Iterator<?> environmentalConditionKeys = environmentalConditionsObject.keys();
-                while (environmentalConditionKeys.hasNext()){
-                    String key = (String) environmentalConditionKeys.next();
-                    EnvironmentalCondition currentEnvironmentalCondition =
-                            new EnvironmentalCondition(environmentalConditionsObject.getJSONArray(key), key);
-                    environmentalConditions.add(currentEnvironmentalCondition);
-                }
-            }
-
-        } catch (JSONException e){
-            e.printStackTrace();
         }
     }
 

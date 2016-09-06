@@ -19,31 +19,20 @@ public class Identifier {
     private int pkgQuantity;
     private Calendar pkgDiscontinueDate;
 
-    public Identifier(JSONObject identifierJson){
-        try {
-            if (!identifierJson.isNull("deviceId")) deviceId = identifierJson.getString("deviceId");
-            if (!identifierJson.isNull("deviceIdType")) deviceIdType = identifierJson.getString("deviceIdType");
-            if (!identifierJson.isNull("deviceIdIssuingAgency")) deviceIdIssuingAgency = identifierJson.getString("deviceIdIssuingAgency");
-            if (!identifierJson.isNull("containsDINumber")) containsDINumber = identifierJson.getString("containsDINumber");
-            if (!identifierJson.isNull("pkgQuantity")) pkgQuantity = identifierJson.getInt("pkgQuantity");
+    public Identifier(JSONObject identifierJson) throws JSONException, ParseException {
+        if (!identifierJson.isNull("deviceId")) deviceId = identifierJson.getString("deviceId");
+        if (!identifierJson.isNull("deviceIdType")) deviceIdType = identifierJson.getString("deviceIdType");
+        if (!identifierJson.isNull("deviceIdIssuingAgency")) deviceIdIssuingAgency = identifierJson.getString("deviceIdIssuingAgency");
+        if (!identifierJson.isNull("containsDINumber")) containsDINumber = identifierJson.getString("containsDINumber");
+        if (!identifierJson.isNull("pkgQuantity")) pkgQuantity = identifierJson.getInt("pkgQuantity");
+        if (!identifierJson.isNull("pkgStatus")) pkgStatus = identifierJson.getString("pkgStatus");
 
-            try {
-                DateFormat format = new SimpleDateFormat("y-M-d", Locale.getDefault());
-                if (!identifierJson.isNull("devicePublishDate")){
-                    Date pubDate = format.parse(identifierJson.getString("devicePublishDate"));
-                    pkgDiscontinueDate = Calendar.getInstance();
-                    pkgDiscontinueDate.setTime(pubDate);
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            if (!identifierJson.isNull("pkgStatus")) pkgStatus = identifierJson.getString("pkgStatus");
-
-        } catch (JSONException e){
-            e.printStackTrace();
+        DateFormat format = new SimpleDateFormat("y-M-d", Locale.getDefault());
+        if (!identifierJson.isNull("devicePublishDate")){
+            Date pubDate = format.parse(identifierJson.getString("devicePublishDate"));
+            pkgDiscontinueDate = Calendar.getInstance();
+            pkgDiscontinueDate.setTime(pubDate);
         }
-
     }
 
     public String getDeviceId() {

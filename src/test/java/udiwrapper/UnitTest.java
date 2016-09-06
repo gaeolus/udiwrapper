@@ -1,5 +1,6 @@
 package udiwrapper;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -77,7 +78,7 @@ public class UnitTest {
         assertEquals(isSterile, device.getSterilization().isDeviceSterile());
     }
 
-    @Test
+    @Test(expected = JSONException.class)
     public void testBadDIDevice() throws Exception {
         JSONObject deviceJson = new JSONObject(badDIDeviceJson);
         Device device = new Device(deviceJson);
@@ -100,7 +101,7 @@ public class UnitTest {
         assertEquals(serialNumber, device.getSerialNumber());
     }
 
-    @Test
+    @Test(expected = JSONException.class)
     public void testBadUDIDevice() throws Exception {
         JSONObject deviceJson = new JSONObject(badDIDeviceJson);
         UDIDevice device = new UDIDevice(deviceJson, headers);

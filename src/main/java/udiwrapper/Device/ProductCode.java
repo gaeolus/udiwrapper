@@ -8,14 +8,10 @@ public class ProductCode {
     private String productCode;
     private String productCodeName;
 
-    public ProductCode(JSONObject productCodeObject, String type){
+    public ProductCode(JSONObject productCodeObject, String type) throws JSONException {
         this.type = type;
-        try {
-            if (!productCodeObject.isNull("productCode")) productCode = productCodeObject.getString("productCode");
-            if (!productCodeObject.isNull("productCodeName")) productCodeName = productCodeObject.getString("productCodeName");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
+        if (!productCodeObject.isNull("productCode")) productCode = productCodeObject.getString("productCode");
+        if (!productCodeObject.isNull("productCodeName")) productCodeName = productCodeObject.getString("productCodeName");
     }
 
     public String getType() {

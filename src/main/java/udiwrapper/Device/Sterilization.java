@@ -8,14 +8,10 @@ public class Sterilization {
     private boolean sterilizePriorToUse;
     private String methodTypes;
 
-    public Sterilization(JSONObject sterilizationObject){
-        try {
-            if (!sterilizationObject.isNull("deviceSterile")) deviceSterile = sterilizationObject.getBoolean("deviceSterile");
-            if (!sterilizationObject.isNull("sterilizationPriorToUse")) sterilizePriorToUse = sterilizationObject.getBoolean("sterilizationPriorToUse");
-            if (!sterilizationObject.isNull("methodTypes")) methodTypes = sterilizationObject.getString("methodTypes");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public Sterilization(JSONObject sterilizationObject) throws JSONException {
+        if (!sterilizationObject.isNull("deviceSterile")) deviceSterile = sterilizationObject.getBoolean("deviceSterile");
+        if (!sterilizationObject.isNull("sterilizationPriorToUse")) sterilizePriorToUse = sterilizationObject.getBoolean("sterilizationPriorToUse");
+        if (!sterilizationObject.isNull("methodTypes")) methodTypes = sterilizationObject.getString("methodTypes");
     }
 
     public boolean isDeviceSterile() {

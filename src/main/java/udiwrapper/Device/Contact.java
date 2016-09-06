@@ -9,15 +9,11 @@ public class Contact {
     private String phoneExtension;
     private String email;
 
-    public Contact(JSONObject contactObject, String type){
+    public Contact(JSONObject contactObject, String type) throws JSONException {
         this.type = type;
-        try {
-            if (!contactObject.isNull("phone")) phone = contactObject.getString("phone");
-            if (!contactObject.isNull("email")) email = contactObject.getString("email");
-            if (!contactObject.isNull("phoneExtension")) phoneExtension = contactObject.getString("phoneExtension");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
+        if (!contactObject.isNull("phone")) phone = contactObject.getString("phone");
+        if (!contactObject.isNull("email")) email = contactObject.getString("email");
+        if (!contactObject.isNull("phoneExtension")) phoneExtension = contactObject.getString("phoneExtension");
     }
 
     public String getType() {
