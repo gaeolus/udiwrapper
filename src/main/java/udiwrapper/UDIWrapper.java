@@ -3,6 +3,7 @@ package udiwrapper;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -46,7 +47,11 @@ public class UDIWrapper {
             Response response = client.newCall(request).execute();
             if (response.code() == 200){
                 JSONObject responseJson = new JSONObject(response.body().string());
-                return new Device(responseJson);
+                try {
+                    return new Device(responseJson);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -69,7 +74,11 @@ public class UDIWrapper {
             if (response.code() == 200){
                 JSONObject responseJson = new JSONObject(response.body().string());
                 Headers responseHeaders = response.headers();
-                return new UDIDevice(responseJson, responseHeaders);
+                try {
+                    return new UDIDevice(responseJson, responseHeaders);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e){
             e.printStackTrace();
