@@ -33,9 +33,7 @@ public class UnitTest {
     @Test
     public void testDeviceExists() throws Exception {
         assertTrue(UDIWrapper.deviceExists(goodDI));
-        assertTrue(UDIWrapper.deviceExists(goodUDI));
         assertFalse(UDIWrapper.deviceExists(badDI));
-        assertFalse(UDIWrapper.deviceExists(badUDI));
     }
 
     @Test
