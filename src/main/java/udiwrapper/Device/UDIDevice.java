@@ -2,7 +2,12 @@ package udiwrapper.Device;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Headers;
 
@@ -27,13 +32,20 @@ public class UDIDevice extends Device {
         if (this.hasSerialNumber()) serialNumber = headers.get("serial_number");
         if (this.hasLotBatch()) lotNumber = headers.get("lot_number");
 
-        if (this.hasExpirationDate()){
-            expirationDate = Calendar.getInstance();
-            expirationDate.setTime(headers.getDate("expiration_date"));
-        }
-        if (this.hasManufacturingDate()){
-            manufacturingDate = Calendar.getInstance();
-            manufacturingDate.setTime(headers.getDate("manufacturing_date"));
+        try {
+            DateFormat format = new SimpleDateFormat("y-M-d", Locale.getDefault());
+            if (this.hasExpirationDate()){
+                expirationDate = Calendar.getInstance();
+                Date expDate = format.parse(headers.get("expiration_date"));
+                expirationDate.setTime(expDate);
+            }
+            if (this.hasManufacturingDate()) {
+                manufacturingDate = Calendar.getInstance();
+                Date manDate = format.parse(headers.get("manufacturing_date"));
+                manufacturingDate.setTime(manDate);
+            }
+        } catch (ParseException e){
+            e.printStackTrace();
         }
 
     }
