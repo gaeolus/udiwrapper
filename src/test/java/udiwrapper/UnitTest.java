@@ -41,7 +41,7 @@ public class UnitTest {
 
     // known values for the DI/UDI Device associated with goodDI and goodUDI
     private String brandName = "XIENCE ALPINE";
-    private String contactEmail = "AV.CUSTOMERCARE@AV.ABBOT.COM";
+    private String contactEmail = "AV.CUSTOMERCARE@AV.ABBOTT.COM";
     private boolean isSterile = true;
 
     // UDI specific values to test against
