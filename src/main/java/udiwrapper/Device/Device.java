@@ -147,7 +147,7 @@ public class Device {
                 while (environmentalConditionKeys.hasNext()){
                     String key = (String) environmentalConditionKeys.next();
                     EnvironmentalCondition currentEnvironmentalCondition =
-                            new EnvironmentalCondition(environmentalConditionsObject.getJSONObject(key), key);
+                            new EnvironmentalCondition(environmentalConditionsObject.getJSONArray(key), key);
                     environmentalConditions.add(currentEnvironmentalCondition);
                 }
             }

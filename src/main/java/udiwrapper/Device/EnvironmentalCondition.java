@@ -1,10 +1,10 @@
 package udiwrapper.Device;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class EnvironmentalCondition {
 
-    public EnvironmentalCondition(JSONObject environmentalConditionObject, String type){
+    public EnvironmentalCondition(JSONArray environmentalConditionObject, String type){
 
     }
 }
