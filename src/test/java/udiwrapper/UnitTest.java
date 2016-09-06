@@ -60,12 +60,14 @@ public class UnitTest {
     public void testFetchDIDevice() throws Exception {
         Device device = UDIWrapper.fetchDIDevice(goodDI);
         assertNotNull(device);
+        assertNull(UDIWrapper.fetchDIDevice(badDI));
     }
 
     @Test
     public void testFetchUDIDevice() throws Exception {
         UDIDevice device = UDIWrapper.fetchUDIDevice(goodUDI);
         assertNotNull(device);
+        assertNull(UDIWrapper.fetchUDIDevice(badUDI));
     }
 
     @Test
