@@ -6,9 +6,9 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -44,10 +44,10 @@ public class Device {
     private Calendar commercialDistributionEndDate;
     private Sterilization sterilization;
     private Identifier identifiers;
-    private ArrayList<Contact> contacts = new ArrayList<>();
-    private ArrayList<ProductCode> productCodes = new ArrayList<>();
-    private ArrayList<DeviceSize> deviceSizes = new ArrayList<>();
-    private ArrayList<EnvironmentalCondition> environmentalConditions = new ArrayList<>();
+    private HashMap<String, Contact> contacts;
+    private HashMap<String, ProductCode> productCodes;
+    private HashMap<String, DeviceSize> deviceSizes;
+    private HashMap<String, EnvironmentalCondition> environmentalConditions;
 
     // All of the information about a Device is in the JSON response
     public Device(JSONObject deviceJson) throws JSONException, ParseException {
@@ -107,43 +107,47 @@ public class Device {
 
         //create array lists with objects
         if (!device.isNull("contacts")){
+            contacts = new HashMap<>();
             JSONObject contactsObject = device.getJSONObject("contacts");
             Iterator<?> contactsKeys = contactsObject.keys();
             while (contactsKeys.hasNext()){
                 String key = (String) contactsKeys.next();
                 Contact currentContact = new Contact(contactsObject.getJSONObject(key), key);
-                contacts.add(currentContact);
+                contacts.put(key, currentContact);
             }
         }
 
         if (!device.isNull("productCodes")){
+            productCodes = new HashMap<>();
             JSONObject productCodeObject = device.getJSONObject("productCodes");
             Iterator<?> productCodeKeys = productCodeObject.keys();
             while (productCodeKeys.hasNext()){
                 String key = (String) productCodeKeys.next();
                 ProductCode currentProductCode = new ProductCode(productCodeObject.getJSONObject(key), key);
-                productCodes.add(currentProductCode);
+                productCodes.put(key, currentProductCode);
             }
         }
 
         if (!device.isNull("deviceSizes")){
+            deviceSizes = new HashMap<>();
             JSONObject deviceSizeObject = device.getJSONObject("deviceSizes");
             Iterator<?> deviceSizeKeys = deviceSizeObject.keys();
             while (deviceSizeKeys.hasNext()){
                 String key = (String) deviceSizeKeys.next();
                 DeviceSize currentDeviceSize = new DeviceSize(deviceSizeObject.getJSONObject(key), key);
-                deviceSizes.add(currentDeviceSize);
+                deviceSizes.put(key, currentDeviceSize);
             }
         }
 
         if (!device.isNull("environmentalConditions")){
+            environmentalConditions = new HashMap<>();
             JSONObject environmentalConditionsObject = device.getJSONObject("environmentalConditions");
             Iterator<?> environmentalConditionKeys = environmentalConditionsObject.keys();
             while (environmentalConditionKeys.hasNext()){
                 String key = (String) environmentalConditionKeys.next();
                 EnvironmentalCondition currentEnvironmentalCondition =
                         new EnvironmentalCondition(environmentalConditionsObject.getJSONArray(key), key);
-                environmentalConditions.add(currentEnvironmentalCondition);
+                environmentalConditions.put(key, currentEnvironmentalCondition);
             }
         }
     }
@@ -291,22 +295,22 @@ public class Device {
         return identifiers;
     }
 
-    public ArrayList<Contact> getContacts() {
+    public HashMap<String, Contact> getContacts() {
         // a list contact information for the manufacturer of the device
         return contacts;
     }
 
-    public ArrayList<ProductCode> getProductCodes() {
+    public HashMap<String, ProductCode> getProductCodes() {
         // a list of the device's product codes
         return productCodes;
     }
 
-    public ArrayList<DeviceSize> getDeviceSizes() {
+    public HashMap<String, DeviceSize> getDeviceSizes() {
         // a list of device sizes
         return deviceSizes;
     }
 
-    public ArrayList<EnvironmentalCondition> getEnvironmentalConditions() {
+    public HashMap<String, EnvironmentalCondition> getEnvironmentalConditions() {
         // a list of different environmental conditions for the device, such as storage handling
         // or any other special environmental information
         return environmentalConditions;

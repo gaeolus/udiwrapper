@@ -11,10 +11,10 @@ public class DeviceTests {
 
     @Test
     public void testContact() throws Exception {
-        assertEquals("+1(800)227-9902", device.getContacts().get(0).getPhone());
-        assertEquals("AV.CUSTOMERCARE@AV.ABBOTT.COM", device.getContacts().get(0).getEmail());
-        assertEquals(null, device.getContacts().get(0).getPhoneExtension());
-        assertEquals("customerContact", device.getContacts().get(0).getType());
+        assertEquals("customerContact", device.getContacts().get("customerContact").getType());
+        assertEquals("+1(800)227-9902", device.getContacts().get("customerContact").getPhone());
+        assertEquals("AV.CUSTOMERCARE@AV.ABBOTT.COM", device.getContacts().get("customerContact").getEmail());
+        assertEquals(null, device.getContacts().get("customerContact").getPhoneExtension());
     }
 
     @Test
@@ -24,15 +24,45 @@ public class DeviceTests {
 
     @Test
     public void testEnvironmentalCondition() throws Exception {
-        // TODO implement. Need to find examples of Device EnvironmentalConditions first
-        assertEquals("storageHandling", device.getEnvironmentalConditions().get(0).getType());
-        assertEquals("Handling Environment Temperature", device.getEnvironmentalConditions().get(0).getConditions().getType());
-        assertEquals("Degrees Celsius", device.getEnvironmentalConditions().get(0).getConditions().getHigh().getUnit());
-        assertEquals("Degrees Celsius", device.getEnvironmentalConditions().get(0).getConditions().getLow().getUnit());
-        assertEquals("30", device.getEnvironmentalConditions().get(0).getConditions().getHigh().getValue());
-        assertEquals("Handling Environment Temperature", device.getEnvironmentalConditions().get(0).getConditions().getType());
+        assertEquals("storageHandling", device.getEnvironmentalConditions().get("storageHandling").getType());
+
+        assertEquals("Handling Environment Temperature",
+                device.getEnvironmentalConditions()
+                        .get("storageHandling")
+                        .getConditions()
+                        .get("Handling Environment Temperature")
+                        .getType());
+
+        assertEquals("Degrees Celsius",
+                device.getEnvironmentalConditions()
+                        .get("storageHandling")
+                        .getConditions()
+                        .get("Handling Environment Temperature")
+                        .getHigh()
+                        .getUnit());
+
+        assertEquals("Degrees Celsius",
+                device.getEnvironmentalConditions()
+                        .get("storageHandling")
+                        .getConditions()
+                        .get("Handling Environment Temperature")
+                        .getLow()
+                        .getUnit());
+
+        assertEquals("30",
+                device.getEnvironmentalConditions()
+                        .get("storageHandling")
+                        .getConditions()
+                        .get("Handling Environment Temperature")
+                        .getHigh()
+                        .getValue());
+
         assertEquals("Store in a dry, dark, cool place. Protect from light. Store at 25 degrees C; excursions between 15 to 30 degrees C permitted.",
-                device.getEnvironmentalConditions().get(0).getConditions().get(1).getSpecialCondition());
+                device.getEnvironmentalConditions()
+                        .get("storageHandling")
+                        .getConditions()
+                        .get("Special Storage Condition, Specify")
+                        .getSpecialConditionText());
     }
 
     @Test
@@ -48,9 +78,9 @@ public class DeviceTests {
 
     @Test
     public void testProductCode() throws Exception {
-        assertEquals("NIQ", device.getProductCodes().get(0).getProductCode());
-        assertEquals("Coronary drug-eluting stent", device.getProductCodes().get(0).getProductCodeName());
-        assertEquals("fdaProductCode", device.getProductCodes().get(0).getType());
+        assertEquals("fdaProductCode", device.getProductCodes().get("fdaProductCode").getType());
+        assertEquals("NIQ", device.getProductCodes().get("fdaProductCode").getProductCode());
+        assertEquals("Coronary drug-eluting stent", device.getProductCodes().get("fdaProductCode").getProductCodeName());
     }
 
     @Test

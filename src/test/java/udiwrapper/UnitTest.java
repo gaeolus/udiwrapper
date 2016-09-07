@@ -76,7 +76,7 @@ public class UnitTest {
         Device device = new Device(deviceJson);
         assertNotNull(device);
         assertEquals(brandName, device.getBrandName());
-        assertEquals(contactEmail, device.getContacts().get(0).getEmail());
+        assertEquals(contactEmail, device.getContacts().get("customerContact").getEmail());
         assertEquals(isSterile, device.getSterilization().isDeviceSterile());
     }
 
