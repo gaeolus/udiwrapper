@@ -1,5 +1,6 @@
 package udiwrapper;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -16,7 +17,11 @@ public class UDIWrapper {
     private static final String DI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?di=";
     private static final String UDI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?udi=";
 
-    // to get whether or not the device exists, the DI must be used
+    /**
+     * @param DI the Device Identifier to be checked against. Currently,
+     *           checking via Unique Device Identifier is not supported.
+     * @return true if the device was found. false if the device wasn't found
+     */
     public static boolean deviceExists(String DI){
         OkHttpClient client = new OkHttpClient();
 
@@ -34,8 +39,11 @@ public class UDIWrapper {
         return false;
     }
 
-    // fetch the Device information with a DI. Returns the Device if the DI is valid
-    // and null if the DI doesn't exist
+    /**
+     * @param DI the Device Identifier. To fetch a Unique Device, see {@link #fetchUDIDevice(String)}
+     * @return the {@link Device} associated with the given Device Identifier (DI)
+     */
+    @Nullable
     public static Device fetchDIDevice(String DI){
         OkHttpClient client = new OkHttpClient();
 
@@ -60,8 +68,12 @@ public class UDIWrapper {
         return null;
     }
 
-    // fetch the Device information with a DI. Returns the Device if the DI is valid
-    // and null if the DI doesn't exist
+    /**
+     * @param UDI the Unique Device Identifier. To fetch a Device using the general
+     *            Device Identifier, see {@link #fetchDIDevice(String)}
+     * @return the {@link UDIDevice} associated with the given Unique Device Identifier (UDI)
+     */
+    @Nullable
     public static UDIDevice fetchUDIDevice(String UDI){
         OkHttpClient client = new OkHttpClient();
 
@@ -87,10 +99,22 @@ public class UDIWrapper {
         return null;
     }
 
+    /**
+     * @param DI the Device Identifier. Currently checking whether an adverse event
+     *           exists for a Unique Device is not supported
+     * @return true if there are adverse events associated with the device. false if
+     * there are none.
+     */
     public static boolean adverseEventsExist(String DI) {
         return false;
     }
 
+
+    /**
+     * @param DI the Device Identifier. Currently counting adverse events
+     *           with a Unique Device is not supported
+     * @return the number of adverse events associated with a Device
+     */
     public static int adverseEventCount(String DI) {
         return 0;
     }
