@@ -1,5 +1,6 @@
 package udiwrapper.Device;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Condition {
@@ -8,7 +9,7 @@ public class Condition {
     private NameValuePair low;
     private String specialConditionText;
 
-    public Condition(JSONObject storageHandlingObject, String metaType) {
+    public Condition(JSONObject storageHandlingObject, String metaType) throws JSONException {
         if (!storageHandlingObject.isNull(metaType + "Type")) type = storageHandlingObject.getString(metaType + "Type");
         if (!storageHandlingObject.isNull(metaType + "SpecialConditionText")) specialConditionText = storageHandlingObject.getString(metaType + "SpecialConditionText");
 
