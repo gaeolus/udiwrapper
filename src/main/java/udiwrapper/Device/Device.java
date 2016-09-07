@@ -12,6 +12,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+/**
+ * The wrapper class for the JSON returned by the
+ * {@see <a href="https://nlm.nih.gov/" target="_blank" rel="noopener">
+ * National Library of Medicine</a>}'s
+ * {@see <a href="https://accessgudid.nlm.nih.gov/resources/developers/device_lookup_api" target="_blank" rel="noopener">
+ * device_lookup API.
+ * </a>}
+ */
 public class Device {
     // deliberately omitting GMDNTerm field because of their copyright statement
     // https://www.gmdnagency.org/Info.aspx?pageid=22
