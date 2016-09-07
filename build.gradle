@@ -5,4 +5,5 @@ dependencies {
     compile 'org.json:json:20140107'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     testCompile 'junit:junit:4.12'
+    compile 'org.jetbrains:annotations:15.0'
 }
