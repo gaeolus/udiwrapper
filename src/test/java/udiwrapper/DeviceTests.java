@@ -25,6 +25,14 @@ public class DeviceTests {
     @Test
     public void testEnvironmentalCondition() throws Exception {
         // TODO implement. Need to find examples of Device EnvironmentalConditions first
+        assertEquals("storageHandling", device.getEnvironmentalConditions().get(0).getType());
+        assertEquals("Handling Environment Temperature", device.getEnvironmentalConditions().get(0).getConditions().getType());
+        assertEquals("Degrees Celsius", device.getEnvironmentalConditions().get(0).getConditions().getHigh().getUnit());
+        assertEquals("Degrees Celsius", device.getEnvironmentalConditions().get(0).getConditions().getLow().getUnit());
+        assertEquals("30", device.getEnvironmentalConditions().get(0).getConditions().getHigh().getValue());
+        assertEquals("Handling Environment Temperature", device.getEnvironmentalConditions().get(0).getConditions().getType());
+        assertEquals("Store in a dry, dark, cool place. Protect from light. Store at 25 degrees C; excursions between 15 to 30 degrees C permitted.",
+                device.getEnvironmentalConditions().get(0).getConditions().get(1).getSpecialCondition());
     }
 
     @Test
