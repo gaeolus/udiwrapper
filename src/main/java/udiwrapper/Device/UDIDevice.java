@@ -46,41 +46,65 @@ public class UDIDevice extends Device {
 
     }
 
+    /**
+     * @return the Unique Device Identifier of the device
+     */
     public String getUdi() {
         // the Unique Device Identifier for the device
         return udi;
     }
 
+    /**
+     * @return the Device Identifier of the device.
+     */
     public String getDi() {
         // the Device Identifier for the device
         return di;
     }
 
+    /**
+     * @return the issuing agency. e.g. "ICCBBA"
+     */
     public String getIssuingAgency() {
         // the issuing agency
         return issuingAgency;
     }
 
+    /**
+     * @return todo
+     */
     public String getDonationId() {
         // the donation ID for the device
         return donationId;
     }
 
+    /**
+     * @return the serial number of the device
+     */
     public String getSerialNumber() {
         // the serial number for the device
         return serialNumber;
     }
 
+    /**
+     * @return the lot number of the device
+     */
     public String getLotNumber() {
         // the lot number for the device
         return lotNumber;
     }
 
+    /**
+     * @return the manufacturing date of the device
+     */
     public Calendar getManufacturingDate() {
         // the date the device was manufactured
         return manufacturingDate;
     }
 
+    /**
+     * @return the expiration date of the device
+     */
     public Calendar getExpirationDate() {
         // the date the device expires
         return expirationDate;

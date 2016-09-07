@@ -26,18 +26,34 @@ public class Condition {
 
     }
 
+    /**
+     * @return the type of condition. e.g. "storageHandling"
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * @return a {@link NameValuePair} of a unit and value.
+     * These may be empty strings, but not null.
+     */
     public NameValuePair getHigh(){
         return high;
     }
 
+    /**
+     * @return a {@link NameValuePair} of a unit and value.
+     * These may be empty strings, but not null.
+     */
     public NameValuePair getLow() {
         return low;
     }
 
+    /**
+     * @return the special condition text for a device which may not
+     * have associated numbers. e.g. "store in a cool, dry place."
+     * May be an empty string, but not null.
+     */
     public String getSpecialConditionText(){
         return specialConditionText;
     }

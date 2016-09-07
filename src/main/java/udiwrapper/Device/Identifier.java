@@ -35,30 +35,51 @@ public class Identifier {
         }
     }
 
+    /**
+     * @return the device ID.
+     */
     public String getDeviceId() {
         return deviceId;
     }
 
+    /**
+     * @return the device ID type. e.g. "Primary"
+     */
     public String getDeviceIdType() {
         return deviceIdType;
     }
 
+    /**
+     * @return the issuing agency of the Device ID. e.g. "GS1"
+     */
     public String getDeviceIdIssuingAgency() {
         return deviceIdIssuingAgency;
     }
 
+    /**
+     * @return todo
+     */
     public String getContainsDINumber() {
         return containsDINumber;
     }
 
+    /**
+     * @return todo
+     */
     public Integer getPkgQuantity() {
         return pkgQuantity;
     }
 
+    /**
+     * @return todo
+     */
     public Calendar getPkgDiscontinueDate() {
         return pkgDiscontinueDate;
     }
 
+    /**
+     * @return todo
+     */
     public String getPkgStatus() {
         return pkgStatus;
     }
