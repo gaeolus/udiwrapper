@@ -87,4 +87,12 @@ public class UDIWrapper {
         return null;
     }
 
+    public static boolean adverseEventsExist(String DI) {
+        return false;
+    }
+
+    public static int adverseEventCount(String DI) {
+        return 0;
+    }
+
 }
