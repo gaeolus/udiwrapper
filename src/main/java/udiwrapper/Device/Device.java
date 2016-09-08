@@ -1,11 +1,13 @@
 package udiwrapper.Device;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,7 +45,7 @@ public class Device {
     private Calendar publishDate;
     private Calendar commercialDistributionEndDate;
     private Sterilization sterilization;
-    private Identifier identifiers;
+    private ArrayList<Identifier> identifiers;
     private HashMap<String, Contact> contacts;
     private HashMap<String, ProductCode> productCodes;
     private HashMap<String, DeviceSize> deviceSizes;
@@ -100,8 +102,16 @@ public class Device {
         // set objects
         if (!device.isNull("sterilization")) sterilization = new Sterilization(device.getJSONObject("sterilization"));
         if (!device.isNull("identifiers")){
+            identifiers = new ArrayList<>();
             if (!device.getJSONObject("identifiers").isNull("identifier")) {
-                identifiers = new Identifier(device.getJSONObject("identifiers").getJSONObject("identifier"));
+                try {
+                    JSONArray identifierArray = device.getJSONObject("identifiers").getJSONArray("identifier");
+                    for (int i = 0; i < identifierArray.length(); i += 1){
+                        identifiers.add(new Identifier(identifierArray.getJSONObject(i)));
+                    }
+                } catch (JSONException e){
+                    identifiers.add(new Identifier(device.getJSONObject("identifiers").getJSONObject("identifier")));
+                }
             }
         }
 
@@ -134,7 +144,7 @@ public class Device {
             Iterator<?> deviceSizeKeys = deviceSizeObject.keys();
             while (deviceSizeKeys.hasNext()){
                 String key = (String) deviceSizeKeys.next();
-                DeviceSize currentDeviceSize = new DeviceSize(deviceSizeObject.getJSONObject(key), key);
+                DeviceSize currentDeviceSize = new DeviceSize(deviceSizeObject.getJSONArray(key), key);
                 deviceSizes.put(key, currentDeviceSize);
             }
         }
@@ -290,7 +300,7 @@ public class Device {
         return sterilization;
     }
 
-    public Identifier getIdentifiers() {
+    public ArrayList<Identifier> getIdentifiers() {
         // various identifiers of the device including the DI
         return identifiers;
     }

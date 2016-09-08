@@ -25,15 +25,67 @@ public class DeviceTests {
 
     @Test
     public void testDeviceSize() throws Exception {
-        assertEquals("Length", deviceWithSize.getDeviceSizes().get("Length").getType());
-        assertEquals("Centimeter", deviceWithSize.getDeviceSizes().get("Length").getSize().getUnit);
-        assertEquals("35", deviceWithSize.getDeviceSizes().get("Length").getSize().getValue);
-        assertNull(deviceWithSize.getDeviceSizes().get("Length").getText());
+        assertEquals("deviceSize", deviceWithSize.getDeviceSizes().get("deviceSize").getType());
 
-        assertEquals("Catheter Gauge", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getType());
-        assertEquals("French", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getSize().getUnit());
-        assertEquals("9", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getSize().getValue());
-        assertNull(deviceWithSize.getDeviceSizes().get("Catheter Gauge").getText());
+        assertEquals("Length",
+                deviceWithSize.getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Length")
+                        .getType());
+
+        assertEquals("Centimeter",
+                deviceWithSize.getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Length")
+                        .getSize()
+                        .getUnit());
+        assertEquals("35",
+                deviceWithSize
+                        .getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Length")
+                        .getSize()
+                        .getValue());
+
+        assertNull(deviceWithSize.getDeviceSizes()
+                .get("deviceSize")
+                .getSizeInformation()
+                .get("Length")
+                .getSizeText());
+
+
+
+        assertEquals("Catheter Gauge",
+                deviceWithSize.getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Catheter Gauge")
+                        .getType());
+
+        assertEquals("French",
+                deviceWithSize.getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Catheter Gauge")
+                        .getSize()
+                        .getUnit());
+        assertEquals("9",
+                deviceWithSize
+                        .getDeviceSizes()
+                        .get("deviceSize")
+                        .getSizeInformation()
+                        .get("Catheter Gauge")
+                        .getSize()
+                        .getValue());
+
+        assertNull(deviceWithSize.getDeviceSizes()
+                .get("deviceSize")
+                .getSizeInformation()
+                .get("Catheter Gauge")
+                .getSizeText());
     }
 
     @Test
@@ -81,13 +133,13 @@ public class DeviceTests {
 
     @Test
     public void testIdentifier() throws Exception {
-        assertEquals("08717648200274", device.getIdentifiers().getDeviceId());
-        assertEquals("Primary", device.getIdentifiers().getDeviceIdType());
-        assertEquals("GS1", device.getIdentifiers().getDeviceIdIssuingAgency());
-        assertEquals(null, device.getIdentifiers().getContainsDINumber());
-        assertEquals(null, device.getIdentifiers().getPkgQuantity());
-        assertEquals(null, device.getIdentifiers().getPkgDiscontinueDate());
-        assertEquals(null, device.getIdentifiers().getPkgStatus());
+        assertEquals("08717648200274", device.getIdentifiers().get(0).getDeviceId());
+        assertEquals("Primary", device.getIdentifiers().get(0).getDeviceIdType());
+        assertEquals("GS1", device.getIdentifiers().get(0).getDeviceIdIssuingAgency());
+        assertEquals(null, device.getIdentifiers().get(0).getContainsDINumber());
+        assertEquals(null, device.getIdentifiers().get(0).getPkgQuantity());
+        assertEquals(null, device.getIdentifiers().get(0).getPkgDiscontinueDate());
+        assertEquals(null, device.getIdentifiers().get(0).getPkgStatus());
     }
 
     @Test
