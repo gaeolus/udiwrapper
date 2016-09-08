@@ -57,28 +57,28 @@ public class Identifier {
     }
 
     /**
-     * @return todo
+     * @return the DI number contained by the device
      */
     public String getContainsDINumber() {
         return containsDINumber;
     }
 
     /**
-     * @return todo
+     * @return the number of packages associated with the device identifier
      */
     public Integer getPkgQuantity() {
         return pkgQuantity;
     }
 
     /**
-     * @return todo
+     * @return date when package is to be discontinued
      */
     public Calendar getPkgDiscontinueDate() {
         return pkgDiscontinueDate;
     }
 
     /**
-     * @return todo
+     * @return status of the package associated with the device identifier
      */
     public String getPkgStatus() {
         return pkgStatus;

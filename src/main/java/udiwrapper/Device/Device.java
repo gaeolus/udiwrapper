@@ -169,8 +169,6 @@ public class Device {
         }
     }
 
-    // TODO verify that comments are accurate
-
     /**
      * @return whether the Device is exempt from affixing a UDI permanently on the device itself
      */
@@ -277,14 +275,14 @@ public class Device {
     }
 
     /**
-     * @return todo
+     * @return the number of the devices associated with the Device ID
      */
     public Integer getDeviceCount() {
         return deviceCount;
     }
 
     /**
-     * @return todo
+     * @return the record status of the device
      */
     public String getRecordStatus() {
         return recordStatus;
