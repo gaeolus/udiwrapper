@@ -14,6 +14,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+/**
+ * The wrapper class for the JSON returned by the
+ * {@see <a href="https://nlm.nih.gov/" target="_blank" rel="noopener">
+ * National Library of Medicine</a>}'s
+ * {@see <a href="https://accessgudid.nlm.nih.gov/resources/developers/device_lookup_api" target="_blank" rel="noopener">
+ * device_lookup API.
+ * </a>}
+ */
 public class Device {
     // deliberately omitting GMDNTerm field because of their copyright statement
     // https://www.gmdnagency.org/Info.aspx?pageid=22
@@ -52,6 +60,15 @@ public class Device {
     private HashMap<String, EnvironmentalCondition> environmentalConditions;
 
     // All of the information about a Device is in the JSON response
+
+    /**
+     * @param deviceJson JSON returned by the NLM's
+     *          {@see <a href="https://accessgudid.nlm.nih.gov/resources/developers/device_lookup_api" target="_blank" rel="noopener">
+     *              device_lookup API
+     *          </a>}
+     * @throws JSONException
+     * @throws ParseException
+     */
     public Device(JSONObject deviceJson) throws JSONException, ParseException {
         // get the relevant JSON object
         JSONObject device = deviceJson.getJSONObject("gudid").getJSONObject("device");
@@ -162,167 +179,229 @@ public class Device {
         }
     }
 
-    // TODO verify that comments are accurate
-
+    /**
+     * @return whether the Device is exempt from affixing a UDI permanently on the device itself
+     */
     public boolean isDMExempt() {
-        // whether the Device is exempt from affixing a UDI permanently on the device itself
         return isDMExempt;
     }
 
+    /**
+     * @return whether the device is exempt from pre-market approval
+     */
     public boolean isPremarketExempt() {
-        // whether the Device is exempt from pre-market approval
         return isPremarketExempt;
     }
 
+    /**
+     * @return whether the device is a Human Cellular and Tissue-based Product
+     */
     public boolean isDeviceHCTP() {
-        // whether the device is a Human Cellular and Tissue-based Product
         return isDeviceHCTP;
     }
 
+    /**
+     * @return whether the device is part of a kit
+     */
     public boolean isDeviceKit() {
-        // whether the device is a kit
         return isDeviceKit;
     }
 
+    /**
+     * @return whether the device is intended to be used in combination with other devices
+     */
     public boolean isDeviceCombinationProduct() {
-        // whether or not the device is intended to be used in combination with other devices
         return isDeviceCombinationProduct;
     }
 
+    /**
+     * @return whether the device is single use
+     */
     public boolean isSingleUse() {
-        // whether the device is single use
         return isSingleUse;
     }
 
+    /**
+     * @return whether the device has a lot batch number
+     */
     public boolean hasLotBatch() {
-        // whether the device has a lot batch number
         return hasLotBatch;
     }
 
+    /**
+     * @return whether the device has a serial number
+     */
     public boolean hasSerialNumber() {
-        // whether the device has a serial number
         return hasSerialNumber;
     }
 
+    /**
+     * @return whether the device has a serial number
+     */
     public boolean hasManufacturingDate() {
-        // whether the device has a serial number
         return hasManufacturingDate;
     }
 
+    /**
+     * @return whether the device has an expiration date
+     */
     public boolean hasExpirationDate() {
-        // whether the device has an expiration date
         return hasExpirationDate;
     }
 
+    /**
+     * @return whether the device has a Donation ID number
+     */
     public boolean hasDonationIdNumber() {
-        // whether the device has a Donation ID number
         return hasDonationIdNumber;
     }
 
+    /**
+     * @return whether the device contains Natural Rubber Latex
+     */
     public boolean isLabeledContainsNRL() {
-        // whether the device contains Natural Rubber Latex
         return labeledContainsNRL;
     }
 
+    /**
+     * @return whether the device is labeled as not having Natural Rubber Latex
+     */
     public boolean isLabeledNoNRL() {
-        // whether the device is labeled as not having Natural Rubber Latex
         return labeledNoNRL;
     }
 
+    /**
+     * @return whether the device requires a prescription for use
+     */
     public boolean requiresRX() {
-        // whether the device requires a prescription for use
         return requiresRX;
     }
 
+    /**
+     * @return whether the device is an Over-the-Counter product
+     */
     public boolean isOTC() {
-        // whether the device is an Over-the-Counter product
         return isOTC;
     }
 
+    /**
+     * @return the number of the devices associated with the Device ID
+     */
     public Integer getDeviceCount() {
-        // TODO
         return deviceCount;
     }
 
+    /**
+     * @return the record status of the device
+     */
     public String getRecordStatus() {
-        // TODO
         return recordStatus;
     }
 
+    /**
+     * @return a description of the device
+     */
     public String getDeviceDescription() {
-        // device description
         return deviceDescription;
     }
 
+    /**
+     * @return the MRI Safety Status of the device
+     */
     public String getMRISafetyStatus() {
-        // the MRI Safety Status of the device
         return MRISafetyStatus;
     }
 
+    /**
+     * @return the commercial distribution status of the device
+     */
     public String getCommercialDistributionStatus() {
-        // the commercial distribution status of the device
         return commercialDistributionStatus;
     }
 
+    /**
+     * @return the brand name of the device
+     */
     public String getBrandName() {
-        // the brand name of the device
         return brandName;
     }
 
+    /**
+     * @return the version model number of the device
+     */
     public String getVersionModelNumber() {
-        // the version model number of the device
         return versionModelNumber;
     }
 
+    /**
+     * @return the catalog number of the device
+     */
     public String getCatalogNumber() {
-        // the catalog number of the device
         return catalogNumber;
     }
 
+    /**
+     * @return the name of the company that manufactures the device
+     */
     public String getCompanyName() {
-        // the name of the company that manufactures the device
         return companyName;
     }
 
+    /**
+     * @return the date the device information was published
+     */
     public Calendar getPublishDate() {
-        // the date the device information was published
         return publishDate;
     }
 
+    /**
+     * @return the date that commercial distribution is set to end
+     */
     public Calendar getCommercialDistributionEndDate() {
-        // the date that commercial distribution is set to end
         return commercialDistributionEndDate;
     }
 
+    /**
+     * @return information regarding {@link Sterilization} of the device.
+     */
     public Sterilization getSterilization() {
-        // information regarding sterilization of the device
-        // See @Sterilization
         return sterilization;
     }
 
+    /**
+     * @return various {@link Identifier}s of the device including the DI.
+     */
     public ArrayList<Identifier> getIdentifiers() {
-        // various identifiers of the device including the DI
         return identifiers;
     }
 
+    /**
+     * @return a list of {@link Contact} information for the manufacturer of the device.
+     */
     public HashMap<String, Contact> getContacts() {
-        // a list contact information for the manufacturer of the device
         return contacts;
     }
 
+    /**
+     * @return a list of the device's {@link ProductCode}s.
+     */
     public HashMap<String, ProductCode> getProductCodes() {
-        // a list of the device's product codes
         return productCodes;
     }
 
+    /**
+     * @return a list of {@link DeviceSize}s
+     */
     public HashMap<String, DeviceSize> getDeviceSizes() {
-        // a list of device sizes
         return deviceSizes;
     }
 
+    /**
+     * @return a list of different environmental conditions for the device,
+     * such as storage handling or any other special environmental information.
+     * See {@link EnvironmentalCondition}
+     */
     public HashMap<String, EnvironmentalCondition> getEnvironmentalConditions() {
-        // a list of different environmental conditions for the device, such as storage handling
-        // or any other special environmental information
         return environmentalConditions;
     }
 }

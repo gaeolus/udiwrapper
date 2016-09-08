@@ -14,14 +14,23 @@ public class Sterilization {
         if (!sterilizationObject.isNull("methodTypes")) methodTypes = sterilizationObject.getString("methodTypes");
     }
 
+    /**
+     * @return whether the device is sterile.
+     */
     public boolean isDeviceSterile() {
         return deviceSterile;
     }
 
+    /**
+     * @return whether the device should be sterilized prior to use
+     */
     public boolean isSterilizePriorToUse() {
         return sterilizePriorToUse;
     }
 
+    /**
+     * @return sterilization methods to achieve the required device sterilization
+     */
     public String getMethodTypes() {
         return methodTypes;
     }

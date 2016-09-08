@@ -113,7 +113,10 @@ public class UnitTest {
 
     @Test
     public void testDeviceHasAdverseEvent() throws Exception {
-        // TODO write tests for adverse events
+        assertTrue(UDIWrapper.adverseEventsExist("00851788001273"));
+        assertFalse(UDIWrapper.adverseEventsExist(goodDI));
+        assertFalse(UDIWrapper.adverseEventsExist(badDI));
+        assert(UDIWrapper.adverseEventCount("00851788001273") == 2);
     }
 
 }

@@ -16,18 +16,32 @@ public class Contact {
         if (!contactObject.isNull("phoneExtension")) phoneExtension = contactObject.getString("phoneExtension");
     }
 
+    /**
+     * @return the type of contact information. e.g. "Handling Environment Temperature"
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * @return the phone number to contact. e.g. "+1(800)227-9902"
+     * May be null.
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * @return the email address. e.g. "AV.CUSTOMERCARE@AV.ABBOTT.COM"
+     * May be null.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @return the phone extension of the contact. May be null.
+     */
     public String getPhoneExtension() {
         return phoneExtension;
     }

@@ -35,30 +35,51 @@ public class Identifier {
         }
     }
 
+    /**
+     * @return the device ID.
+     */
     public String getDeviceId() {
         return deviceId;
     }
 
+    /**
+     * @return the device ID type. e.g. "Primary"
+     */
     public String getDeviceIdType() {
         return deviceIdType;
     }
 
+    /**
+     * @return the issuing agency of the Device ID. e.g. "GS1"
+     */
     public String getDeviceIdIssuingAgency() {
         return deviceIdIssuingAgency;
     }
 
+    /**
+     * @return the DI number contained by the device
+     */
     public String getContainsDINumber() {
         return containsDINumber;
     }
 
+    /**
+     * @return the number of packages associated with the device identifier
+     */
     public Integer getPkgQuantity() {
         return pkgQuantity;
     }
 
+    /**
+     * @return date when package is to be discontinued
+     */
     public Calendar getPkgDiscontinueDate() {
         return pkgDiscontinueDate;
     }
 
+    /**
+     * @return status of the package associated with the device identifier
+     */
     public String getPkgStatus() {
         return pkgStatus;
     }

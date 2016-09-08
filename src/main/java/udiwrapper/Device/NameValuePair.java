@@ -9,10 +9,16 @@ public class NameValuePair {
         this.value = value;
     }
 
+    /**
+     * @return the unit
+     */
     public String getUnit(){
         return unit;
     }
 
+    /**
+     * @return the value
+     */
     public String getValue(){
         return value;
     }

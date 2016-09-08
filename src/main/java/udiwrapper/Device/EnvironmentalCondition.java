@@ -20,10 +20,16 @@ public class EnvironmentalCondition {
         }
     }
 
+    /**
+     * @return the type of condition. e.g. "storageHandling"
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * @return a list of {@link Condition}s
+     */
     public HashMap<String, Condition> getConditions() {
         return conditions;
     }
