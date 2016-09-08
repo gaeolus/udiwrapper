@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class DeviceTests {
     private static final Device device = UDIWrapper.fetchDIDevice("08717648200274");
     private static final UDIDevice udiDevice = UDIWrapper.fetchUDIDevice("=/08717648200274=,000025=A99971312345600=>014032=}013032&,1000000000000XYZ123");
+    private static final Device deviceWithSize = UDIWrapper.fetchDIDevice("00801741051746");
 
     @Test
     public void testContact() throws Exception {
@@ -24,7 +25,15 @@ public class DeviceTests {
 
     @Test
     public void testDeviceSize() throws Exception {
-        // TODO implement. Need to find examples of Device Size first
+        assertEquals("Length", deviceWithSize.getDeviceSizes().get("Length").getType());
+        assertEquals("Centimeter", deviceWithSize.getDeviceSizes().get("Length").getSize().getUnit);
+        assertEquals("35", deviceWithSize.getDeviceSizes().get("Length").getSize().getValue);
+        assertNull(deviceWithSize.getDeviceSizes().get("Length").getText());
+
+        assertEquals("Catheter Gauge", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getType());
+        assertEquals("French", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getSize().getUnit());
+        assertEquals("9", deviceWithSize.getDeviceSizes().get("Catheter Gauge").getSize().getValue());
+        assertNull(deviceWithSize.getDeviceSizes().get("Catheter Gauge").getText());
     }
 
     @Test
