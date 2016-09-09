@@ -115,7 +115,7 @@ public class UnitTest {
     public void testDeviceHasAdverseEvent() throws Exception {
         assertTrue(UDIWrapper.adverseEventsExist("00851788001273"));
         assertFalse(UDIWrapper.adverseEventsExist(goodDI));
-        assertFalse(UDIWrapper.adverseEventsExist(badDI));
+        assertFalse(UDIWrapper.adverseEventsExist("38sjf8z"));
         assert(UDIWrapper.adverseEventCount("00851788001273") == 2);
     }
 
