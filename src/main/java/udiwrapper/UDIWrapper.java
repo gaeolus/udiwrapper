@@ -16,6 +16,7 @@ import udiwrapper.Device.UDIDevice;
 public class UDIWrapper {
     private static final String DI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?di=";
     private static final String UDI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?udi=";
+    private static final String ADVERSE_URL = "https://api.fda.gov/device/event.json?search=device.other_id_number.exact:";
 
     /**
      * @param DI the Device Identifier to be checked against. Currently,
@@ -106,6 +107,19 @@ public class UDIWrapper {
      * there are none.
      */
     public static boolean adverseEventsExist(String DI) {
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(ADVERSE_URL + DI)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            return response.code() == 200;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -116,6 +130,23 @@ public class UDIWrapper {
      * @return the number of adverse events associated with a Device
      */
     public static int adverseEventCount(String DI) {
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(ADVERSE_URL + DI)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200){
+                JSONObject responseJson = new JSONObject(response.body().string());
+                JSONObject results = responseJson.getJSONObject("meta").getJSONObject("results");
+                return results.getInt("total");
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return 0;
     }
 
