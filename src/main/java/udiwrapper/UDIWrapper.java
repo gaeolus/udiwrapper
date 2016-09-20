@@ -1,6 +1,5 @@
 package udiwrapper;
 
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -43,7 +42,6 @@ public class UDIWrapper {
      * @param DI the Device Identifier. To fetch a Unique Device, see {@link #fetchUDIDevice(String)}
      * @return the {@link Device} associated with the given Device Identifier (DI)
      */
-    @Nullable
     public static Device fetchDIDevice(String DI){
         OkHttpClient client = new OkHttpClient();
 
@@ -73,7 +71,6 @@ public class UDIWrapper {
      *            Device Identifier, see {@link #fetchDIDevice(String)}
      * @return the {@link UDIDevice} associated with the given Unique Device Identifier (UDI)
      */
-    @Nullable
     public static UDIDevice fetchUDIDevice(String UDI){
         OkHttpClient client = new OkHttpClient();
 
