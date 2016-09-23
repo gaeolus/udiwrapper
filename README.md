@@ -15,9 +15,6 @@ To get more detailed information about a specific device, use the UDI to get a `
 String deviceUDI = "(01)08717648200274(02)000025(03)A99971312345600";
 UDIDevice myDevice = UDIWrapper.fetchUDIDevice(deviceUDI);
 ```
-# Documentation
-Check [the documentation](https://bensmith41.github.io/UDIWrapper) to see what properties are available for ```Device``` and ```UDIDevice```.
-
 # Future plans
 - A sample Android App
 - Support for displaying adverse events for a given device - from the [FDA's device/event API](https://open.fda.gov/device/event/)
