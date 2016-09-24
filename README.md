@@ -38,7 +38,9 @@ UDIDevice myDevice = UDIWrapper.fetchUDIDevice(deviceUDI);
 # Documentation
 Check [the documentation](https://bensmith41.github.io/udiwrapper) to see what properties are available for ```Device``` and ```UDIDevice```.
 
+# Example
+This is a [very simple sample Android App](https://github.com/bensmith41/udi-sample-android) that uses this library. It's not meant to be all that useful. It just shows that the wrapper works.
+
 # Future plans
-- A sample Android App
 - Support for displaying adverse events for a given device - from the [FDA's device/event API](https://open.fda.gov/device/event/)
 - Support for displaying recall status for a given device - from the [FDA's device/recall API](https://open.fda.gov/device/recall/)
