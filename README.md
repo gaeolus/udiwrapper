@@ -36,7 +36,7 @@ String deviceUDI = "(01)08717648200274(02)000025(03)A99971312345600";
 UDIDevice myDevice = UDIWrapper.fetchUDIDevice(deviceUDI);
 ```
 # Documentation
-Check [the documentation](https://bensmith41.github.io/UDIWrapper) to see what properties are available for ```Device``` and ```UDIDevice```.
+Check [the documentation](https://bensmith41.github.io/udiwrapper) to see what properties are available for ```Device``` and ```UDIDevice```.
 
 # Future plans
 - A sample Android App
