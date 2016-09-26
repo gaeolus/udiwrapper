@@ -5,7 +5,7 @@ stages:
 build_project:
   stage: build
   script:
-    - gradle build
+    - gradle assemble
   tags:
     - java
     - gradle
