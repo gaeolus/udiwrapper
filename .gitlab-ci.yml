@@ -1,5 +1,3 @@
-image: frekele/gradle
-
 stages:
   - build
   - test
