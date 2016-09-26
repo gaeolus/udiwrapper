@@ -1,4 +1,4 @@
-package udiwrapper.Device;
+package udiwrapper.nlm.Device;
 
 public class NameValuePair {
     private String unit;

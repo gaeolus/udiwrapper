@@ -1,4 +1,4 @@
-package udiwrapper;
+package udiwrapper.nlm;
 
 import org.json.JSONObject;
 
@@ -9,8 +9,8 @@ import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import udiwrapper.Device.Device;
-import udiwrapper.Device.UDIDevice;
+import udiwrapper.nlm.Device.Device;
+import udiwrapper.nlm.Device.UDIDevice;
 
 public class UDIWrapper {
     private static final String DI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?di=";

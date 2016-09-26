@@ -1,12 +1,12 @@
-package udiwrapper;
+package udiwrapper.nlm;
 
 import org.junit.Test;
 
 import java.util.Calendar;
-import java.util.Date;
 
-import udiwrapper.Device.Device;
-import udiwrapper.Device.UDIDevice;
+import udiwrapper.nlm.Device.Device;
+import udiwrapper.nlm.Device.UDIDevice;
+import udiwrapper.nlm.UDIWrapper;
 
 import static org.junit.Assert.*;
 

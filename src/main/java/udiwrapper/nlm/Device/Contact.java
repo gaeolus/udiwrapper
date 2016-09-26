@@ -1,4 +1,4 @@
-package udiwrapper.Device;
+package udiwrapper.nlm.Device;
 
 import org.json.JSONException;
 import org.json.JSONObject;

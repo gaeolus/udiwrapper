@@ -1,4 +1,4 @@
-package udiwrapper;
+package udiwrapper.nlm;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,8 +11,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.Headers;
-import udiwrapper.Device.Device;
-import udiwrapper.Device.UDIDevice;
+import udiwrapper.nlm.Device.Device;
+import udiwrapper.nlm.Device.UDIDevice;
+import udiwrapper.nlm.UDIWrapper;
 
 import static org.junit.Assert.*;
 
