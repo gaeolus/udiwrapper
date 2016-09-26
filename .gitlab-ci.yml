@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+
+build_project:
+  stage: build
+  script:
+    - gradle assemble
+  tags:
+    - java
+    - gradle
+
+test_project:
+  stage: test
+  script:
+    - gradle test
+  tags:
+    - java
+    - gradle
