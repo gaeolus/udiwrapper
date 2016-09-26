@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udiwrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/udiwrapper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udiwrapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/udiwrapper_main.iml" group="udiwrapper" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udiwrapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/udiwrapper_test.iml" group="udiwrapper" />
+      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udi-wrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/udi-wrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udi-wrapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/udi-wrapper_main.iml" group="udi-wrapper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/udi-wrapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/udi-wrapper_test.iml" group="udi-wrapper" />
     </modules>
   </component>
 </project>
