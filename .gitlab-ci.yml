@@ -3,16 +3,16 @@ stages:
   - test
 
 build_project:
-  - stage: build
-  - script:
+  stage: build
+  script:
     - gradle build
-  - tags:
+  tags:
     - java
     - gradle
 
 test_project:
-  - stage: test
-  - script:
+  stage: test
+  script:
     - gradle test
   tags:
     - java
