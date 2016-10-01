@@ -12,9 +12,8 @@ class Environment {
 
 public class openFDAWrapperTests {
     private String apiKey = new Environment().getFdaApiKey();
-    private UDIWrapper udiWrapper = UDIWrapper.setApiKey(apiKey);
+    private UDIWrapper.Builder builder = new UDIWrapper.Builder(apiKey);
 
-    // meta-test to make sure the API Key is set as an environment variable
     @Test
     public void testApiKeyNotNull(){
         assertNotNull(apiKey);
@@ -22,33 +21,44 @@ public class openFDAWrapperTests {
 
     @Test
     public void testGoodDiExists(){
-        assertTrue(udiWrapper.getDeviceExists("08717648200274"));
+        UDIWrapper udiWrapper = builder.setSearch(null, "08717648200274").build();
+        assertTrue(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testBadDiExists(){
-        assertFalse(udiWrapper.getDeviceExists("something"));
+        UDIWrapper udiWrapper = builder.setSearch(null, "test").build();
+        assertFalse(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testDefaultSearch(){
-        assertNotNull(udiWrapper.fetchDevice("08717648200274"));
+        UDIWrapper udiWrapper = builder.setSearch(null, "08717648200274").build();
+        assertNotNull(udiWrapper.getDevices());
     }
 
     @Test
     public void testSearching(){
+        UDIWrapper udiWrapper = builder.setSearch("brand_name", "XIENCE").build();
         int numberReturned = 262;
-        assertEquals(numberReturned, udiWrapper.setSearch("brand_name", "XIENCE").getTotal());
+        assertEquals(numberReturned, udiWrapper.getTotal());
     }
 
     @Test
     public void testSkipping(){
-        assertTrue(udiWrapper.setSkip("261").setSearch("brand_name", "XIENCE").getDeviceExists());
-        assertFalse(udiWrapper.setSkip("262").setSearch("brand_name", "XIENCE").getDeviceExists());
+        UDIWrapper udiWrapper = builder
+                .setSearch("brand_name", "XIENCE")
+                .setSkip(261)
+                .build();
+        assertTrue(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testCounting(){
-        assertTrue(udiWrapper.setCount("brand_name").getDeviceExists());
+        UDIWrapper udiWrapper = builder
+                .setSearch("brand_name", "XIENCE")
+                .setCount("brand_name")
+                .build();
+        assertTrue(udiWrapper.getSearchExists());
     }
 }
