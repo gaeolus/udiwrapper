@@ -4,34 +4,15 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
 
 public class UDIWrapper {
-    private String apiKey;
-    private String searchProperty;
-    private String searchValue;
-    private String countValue;
-    private String limitValue;
-    private String skipValue;
-
-    private final String SEARCH = "search";
-    private final String COUNT = "count";
-    private final String SKIP = "skip";
-    private final String LIMIT = "limit";
-    private final String FDA_SCHEME = "https";
-    private final String FDA_HOST = "api.fda.gov";
-    private final String FDA_DEVICE_PATH = "device";
-    private final String FDA_UDI = "udi.json";
-    private final String API_KEY = "api_key";
-
-    private HttpUrl.Builder OPEN_FDA_UDI_BUILDER = new HttpUrl.Builder()
-            .scheme(FDA_SCHEME)
-            .host(FDA_HOST)
-            .addPathSegment(FDA_DEVICE_PATH)
-            .addPathSegment(FDA_UDI)
-            .addQueryParameter(API_KEY, apiKey);
+    private boolean searchExists;
+    private int total;
+    private List<Object> devices;
 
     private UDIWrapper(String apiKey,
                        String searchProperty,
@@ -39,41 +20,60 @@ public class UDIWrapper {
                        String countValue,
                        String limitValue,
                        String skipValue){
-        this.apiKey = apiKey;
-        this.searchProperty = searchProperty;
-        this.searchValue = searchValue;
-        this.countValue = countValue;
-        this.limitValue = limitValue;
-        this.skipValue = skipValue;
-    }
 
-    public boolean getSearchExists(){
-        HttpUrl searchUrl = OPEN_FDA_UDI_BUILDER
+        String SEARCH = "search";
+        String COUNT = "count";
+        String SKIP = "skip";
+        String LIMIT = "limit";
+        String FDA_SCHEME = "https";
+        String FDA_HOST = "api.fda.gov";
+        String FDA_DEVICE_PATH = "device";
+        String FDA_UDI = "udi.json";
+        String API_KEY = "api_key";
+        HttpUrl searchUrl = new HttpUrl.Builder()
+                .scheme(FDA_SCHEME)
+                .host(FDA_HOST)
+                .addPathSegment(FDA_DEVICE_PATH)
+                .addPathSegment(FDA_UDI)
+                .addQueryParameter(API_KEY, apiKey)
                 .addQueryParameter(SEARCH, searchProperty + ":" + searchValue)
                 .addQueryParameter(COUNT, countValue)
                 .addQueryParameter(LIMIT, limitValue)
                 .addQueryParameter(SKIP, skipValue)
                 .build();
 
+
         Request request = new Request.Builder().url(searchUrl).build();
         OkHttpClient client = new OkHttpClient();
 
+        searchExists = false;
+        total = 0;
+        devices = null;
+
         try {
             Response response = client.newCall(request).execute();
-            return response.code() == 200;
+            searchExists = (response.code() == 200);
+            if (searchExists && countValue.isEmpty()) {
+                JSONObject metaObject = new JSONObject(response.body().string()).getJSONObject("meta");
+                total = metaObject.getJSONObject("results").getInt("total");
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+    }
+
+    public boolean getSearchExists(){
+        return searchExists;
     }
 
     public List<Object> getDevices(){
-        return null;
+        return devices;
     }
 
     public int getTotal(){
-        return 0;
+        return total;
     }
 
     public static class Builder {
@@ -147,7 +147,7 @@ public class UDIWrapper {
 
             // count and skip can't be used together. If they're both set, throw
             // a new exception
-            if (!countValue.equals("") && !skipValue.equals("0")){
+            if (!countValue.isEmpty() && !skipValue.equals("0")){
                 throw new IllegalArgumentException("You must pick either count OR skip. You cannot use both");
             }
 
