@@ -161,15 +161,12 @@ public class UDIWrapper {
                 throw new IllegalArgumentException("A search value must be set!");
             }
 
-            UDIWrapper wrapper =
-                    new UDIWrapper(apiKey,
-                            searchProperty,
-                            searchValue,
-                            countValue,
-                            limitValue,
-                            skipValue);
-
-            return wrapper;
+            return new UDIWrapper(apiKey,
+                    searchProperty,
+                    searchValue,
+                    countValue,
+                    limitValue,
+                    skipValue);
         }
     }
 }
