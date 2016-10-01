@@ -4,15 +4,16 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class UDIWrapper {
     private boolean searchExists;
     private int total;
-    private List<Object> devices;
+    private ArrayList<Object> devices;
 
     private UDIWrapper(String apiKey,
                        String searchProperty,
@@ -48,14 +49,25 @@ public class UDIWrapper {
 
         searchExists = false;
         total = 0;
-        devices = null;
+        devices = new ArrayList<>();
 
         try {
             Response response = client.newCall(request).execute();
             searchExists = (response.code() == 200);
             if (searchExists && countValue.isEmpty()) {
-                JSONObject metaObject = new JSONObject(response.body().string()).getJSONObject("meta");
+                JSONObject baseJSON = new JSONObject(response.body().string());
+                JSONObject metaObject = baseJSON.getJSONObject("meta");
+                JSONArray resultsArray = baseJSON.getJSONArray("results");
                 total = metaObject.getJSONObject("results").getInt("total");
+
+                for (int i = 0; i < resultsArray.length(); i += 1){
+                    JSONObject currentDeviceJSON = resultsArray.getJSONObject(i);
+
+                    // TODO set the device here
+
+                    // add the device to the devices list
+                    devices.add(currentDeviceJSON); // TODO set a device instead of JSON
+                }
 
             }
         } catch (IOException e) {
@@ -68,7 +80,7 @@ public class UDIWrapper {
         return searchExists;
     }
 
-    public List<Object> getDevices(){
+    public ArrayList<Object> getDevices(){
         return devices;
     }
 
