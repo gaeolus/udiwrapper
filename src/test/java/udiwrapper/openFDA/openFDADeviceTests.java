@@ -45,7 +45,7 @@ public class openFDADeviceTests {
 
     @Test
     public void testIsDirectMarkingExempt(){
-        assertFalse(device.isDirectMarketingExempt());
+        assertFalse(device.isDirectMarkingExempt());
     }
 
     @Test
