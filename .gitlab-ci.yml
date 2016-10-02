@@ -1,19 +1,15 @@
+image: frekele/gradle:latest
+
 stages:
   - build
   - test
 
-build_project:
+build:
   stage: build
   script:
-    - gradle assemble
-  tags:
-    - java
-    - gradle
+  - gradle assemble
 
-test_project:
+test:
   stage: test
   script:
-    - gradle test
-  tags:
-    - java
-    - gradle
+  - gradle test

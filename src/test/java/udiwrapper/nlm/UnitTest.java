@@ -18,6 +18,14 @@ import udiwrapper.nlm.UDIWrapper;
 import static org.junit.Assert.*;
 
 public class UnitTest {
+
+    // removing these tests as the nlm package is being deprecated
+
+    @Test
+    public void testPlaceHolder(){
+        assertTrue(true);
+    }
+    /*
     private String goodDI = "08717648200274";
     private String badDI = "not a valid DI";
     // I don't quite understand how this is a valid UDI, but it's the UDI given as an example
@@ -111,5 +119,6 @@ public class UnitTest {
         assertNull(device);
 
     }
+    */
 
 }
