@@ -3,6 +3,7 @@ package udiwrapper.openFDA;
 import org.json.JSONObject;
 import org.junit.Test;
 import udiwrapper.openFDA.Device.Device;
+import udiwrapper.openFDA.Device.Identifier;
 
 import java.util.Calendar;
 
@@ -167,26 +168,65 @@ public class openFDADeviceTests {
         assertTrue(device.isSterile());
     }
 
-    /* TODO Write these tests
     @Test
     public void testIdentifiers(){
+        assertTrue(device.getIdentifierTypes().contains("Primary"));
+        assertTrue(device.getIdentifierTypes().contains("Package"));
+        assertFalse(device.getIdentifierTypes().contains("Something Random"));
 
+        Identifier primaryIdentifier = device.getIdentifier("Primary");
+        Identifier packageIdentifier = device.getIdentifier("Package");
+
+        assertEquals("00801741051746", primaryIdentifier.getId());
+        assertEquals("GS1", primaryIdentifier.getIssuingAgency());
+        assertEquals("Primary", primaryIdentifier.getType());
+
+        assertEquals("10801741051743", packageIdentifier.getId());
+        assertEquals("GS1", packageIdentifier.getIssuingAgency());
+        assertEquals(24, packageIdentifier.getQuantityPerPackage());
+        assertEquals("00801741051746", packageIdentifier.getUnitOfUseId());
+        assertEquals("In Commercial Distribution", packageIdentifier.getPackageStatus());
+        assertEquals("Package", packageIdentifier.getType());
     }
 
     @Test
     public void testProductCodes(){
+        assertTrue(device.getProductCodeTypes().contains("LJS"));
 
+        ProductCode productCode = device.getProductCode("LJS");
+
+        assertEquals("Catheter,intravascular,therapeutic,long-term greater than 30 days",
+                productCode.getName());
+        assertEquals("Catheter,Intravascular,Therapeutic,Long-Term Greater Than 30 Days",
+                productCode.getOpenFDAName());
+        assertEquals("General Hospital",
+                productCode.getOpenFDASpecialtyDescription());
+        assertEquals("2",
+                productCode.getOpenFDADeviceClass());
+        assertEquals("880.5970",
+                productCode.getOpenFDARegulationNumber());
     }
 
     @Test
     public void testCustomerContacts(){
+        assertTrue(device.getContactEmails().contains("medical.services@crbard.com"));
+        assertTrue(device.getContactPhones().contains("+1(800)545-0890"));
 
     }
 
     @Test
     public void testDeviceSizes(){
+        assertTrue(device.getDeviceSizeTypes().contains("Length"));
+        assertTrue(device.getDeviceSizeTypes().contains("Catheter Gauge"));
 
+        DeviceSize length = device.getDeviceSize("Length");
+        DeviceSize catheterGauge = device.getSize("Catheter Gauge");
+
+        assertEquals("35", length.getValue());
+        assertEquals("Centimeter", length.getUnit());
+
+        assertEquals("9", catheterGauge.getValue());
+        assertEquals("French", catheterGauge.getUnit());
     }
-    */
 
 }
