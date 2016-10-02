@@ -6,14 +6,17 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import udiwrapper.openFDA.Device.Device;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UDIWrapper {
     private boolean searchExists;
     private int total;
-    private ArrayList<Object> devices;
+    private Map<String, Device> devices;
 
     private UDIWrapper(String apiKey,
                        String searchProperty,
@@ -49,7 +52,7 @@ public class UDIWrapper {
 
         searchExists = false;
         total = 0;
-        devices = new ArrayList<>();
+        devices = new HashMap<>();
 
         try {
             Response response = client.newCall(request).execute();
@@ -63,10 +66,9 @@ public class UDIWrapper {
                 for (int i = 0; i < resultsArray.length(); i += 1){
                     JSONObject currentDeviceJSON = resultsArray.getJSONObject(i);
 
-                    // TODO set the device here
+                    Device currentDevice = new Device(currentDeviceJSON);
 
-                    // add the device to the devices list
-                    devices.add(currentDeviceJSON); // TODO set a device instead of JSON
+                    devices.put(currentDevice.getDeviceIdentifier(), currentDevice);
                 }
 
             }
@@ -80,7 +82,7 @@ public class UDIWrapper {
         return searchExists;
     }
 
-    public ArrayList<Object> getDevices(){
+    public Map<String, Device> getDevices(){
         return devices;
     }
 
