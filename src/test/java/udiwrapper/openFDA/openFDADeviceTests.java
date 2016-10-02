@@ -3,7 +3,9 @@ package udiwrapper.openFDA;
 import org.json.JSONObject;
 import org.junit.Test;
 import udiwrapper.openFDA.Device.Device;
+import udiwrapper.openFDA.Device.DeviceSize;
 import udiwrapper.openFDA.Device.Identifier;
+import udiwrapper.openFDA.Device.ProductCode;
 
 import java.util.Calendar;
 
@@ -220,7 +222,7 @@ public class openFDADeviceTests {
         assertTrue(device.getDeviceSizeTypes().contains("Catheter Gauge"));
 
         DeviceSize length = device.getDeviceSize("Length");
-        DeviceSize catheterGauge = device.getSize("Catheter Gauge");
+        DeviceSize catheterGauge = device.getDeviceSize("Catheter Gauge");
 
         assertEquals("35", length.getValue());
         assertEquals("Centimeter", length.getUnit());
