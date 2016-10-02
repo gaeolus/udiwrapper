@@ -155,8 +155,10 @@ public class openFDADeviceTests {
     @Test
     public void testPublishDate(){
         Calendar publishDate = Calendar.getInstance();
-        publishDate.set(2015, Calendar.JULY, 27, 0,0,0);
-        assertEquals(publishDate, device.getPublishDate());
+        publishDate.set(2015, Calendar.JUNE, 27, 0,0,0);
+        assertEquals(publishDate.get(Calendar.YEAR), device.getPublishDate().get(Calendar.YEAR));
+        assertEquals(publishDate.get(Calendar.DAY_OF_MONTH), device.getPublishDate().get(Calendar.DAY_OF_MONTH));
+        assertEquals(publishDate.get(Calendar.MONTH), device.getPublishDate().get(Calendar.MONTH));
     }
 
     @Test
