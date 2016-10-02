@@ -20,7 +20,7 @@ public class openFDADeviceTests {
     @Test
     public void testDeviceIdentifier() {
         String deviceIdentifier = "00801741051746";
-        assertEquals(deviceIdentifier, deviceIdentifier.getDeviceIdentifier());
+        assertEquals(deviceIdentifier, device.getDeviceIdentifier());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class openFDADeviceTests {
 
     @Test
     public void testIsOTC(){
-        assertFalse(device.isOverTheCounter);
+        assertFalse(device.isOverTheCounter());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class openFDADeviceTests {
     @Test
     public void testMRISafety(){
         String MRISafety = "Labeling does not contain MRI Safety Information";
-        assertEquals(MRISafety, deviceString.getMRISafety());
+        assertEquals(MRISafety, device.getMRISafety());
     }
 
     @Test
