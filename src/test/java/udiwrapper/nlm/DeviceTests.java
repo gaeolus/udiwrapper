@@ -11,6 +11,15 @@ import udiwrapper.nlm.UDIWrapper;
 import static org.junit.Assert.*;
 
 public class DeviceTests {
+
+    // removing these tests as the nlm package is being deprecated
+
+    @Test
+    public void testPlaceHolder(){
+        assertTrue(true);
+    }
+
+    /*
     private static final Device device = UDIWrapper.fetchDIDevice("08717648200274");
     private static final UDIDevice udiDevice = UDIWrapper.fetchUDIDevice("=/08717648200274=,000025=A99971312345600=>014032=}013032&,1000000000000XYZ123");
     private static final Device deviceWithSize = UDIWrapper.fetchDIDevice("00801741051746");
@@ -211,5 +220,6 @@ public class DeviceTests {
         assertNull(udiDevice.getDonationId());
         assertNull(udiDevice.getLotNumber());
     }
+    */
 
 }
