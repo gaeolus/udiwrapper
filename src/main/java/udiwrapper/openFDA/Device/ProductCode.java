@@ -29,26 +29,50 @@ public class ProductCode {
         this.openFDARegulationNumber = regulationNumber;
     }
 
+    /**
+     *
+     * @return The product code
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     *
+     * @return The name of the product code
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return The openFDA Name
+     */
     public String getOpenFDAName() {
         return openFDAName;
     }
 
+    /**
+     *
+     * @return The openFDA Specialty Description
+     */
     public String getOpenFDASpecialtyDescription() {
         return openFDASpecialtyDescription;
     }
 
+    /**
+     *
+     * @return The openFDA Device Class
+     */
     public String getOpenFDADeviceClass() {
         return openFDADeviceClass;
     }
 
+    /**
+     *
+     * @return The openFDA Regulation Number
+     */
     public String getOpenFDARegulationNumber() {
         return openFDARegulationNumber;
     }
