@@ -3,6 +3,7 @@ package udiwrapper.nlm.Device;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Deprecated
 public class ProductCode {
     private String type;
     private String productCode;

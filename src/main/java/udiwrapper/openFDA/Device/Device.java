@@ -209,154 +209,307 @@ public class Device {
         return null;
     }
 
+    /**
+     *
+     * @return Whether or not the Device has a donation ID.
+     */
     public boolean hasDonationId() {
         return hasDonationId;
     }
 
+    /**
+     *
+     * @return Whether or not the Device requires a prescription
+     */
     public boolean isPrescription() {
         return isPrescription;
     }
 
+    /**
+     *
+     * @return Whether or not the Device is labeled as No Rubber Latex
+     */
     public boolean isLabeledAsNRL() {
         return isLabeledAsNRL;
     }
 
+    /**
+     *
+     * @return Whether or not the device has a Serial Number
+     */
     public boolean hasSerialNumber() {
         return hasSerialNumber;
     }
 
+    /**
+     *
+     * @return Whether or not the device is Direct Marking Exempt
+     */
     public boolean isDirectMarkingExempt() {
         return isDirectMarkingExempt;
     }
 
+    /**
+     *
+     * @return Whether or not the device is labeled as "No NRL"
+     */
     public boolean isLabeledAsNoNRL() {
         return isLabeledAsNoNRL;
     }
 
+    /**
+     *
+     * @return Whether or not the device is Single Use
+     */
     public boolean isSingleUse() {
         return isSingleUse;
     }
 
+    /**
+     *
+     * @return Whether or not the device is available over the counter
+     */
     public boolean isOverTheCounter() {
         return isOverTheCounter;
     }
 
+    /**
+     *
+     * @return Whether or not the device has a manufacturing date
+     */
     public boolean hasManufacturingDate() {
         return hasManufacturingDate;
     }
 
+    /**
+     *
+     * @return Whether or not the device is a combination product
+     */
     public boolean isCombinationProduct() {
         return isCombinationProduct;
     }
 
+    /**
+     *
+     * @return Whether or not the device is part of a kit
+     */
     public boolean isKit() {
         return isKit;
     }
 
+    /**
+     *
+     * @return Whether or not the device is Pre-market Exempt
+     */
     public boolean isPMExempt() {
         return isPMExempt;
     }
 
+    /**
+     *
+     * @return Whether or not the device has a lot or batch number
+     */
     public boolean hasLotOrBatchNumber() {
         return hasLotOrBatchNumber;
     }
 
+    /**
+     *
+     * @return Whether or not the device has an expiration date
+     */
     public boolean hasExpirationDate() {
         return hasExpirationDate;
     }
 
+    /**
+     *
+     * @return Whether or not the device is HCTP
+     */
     public boolean isHCTP() {
         return isHCTP;
     }
 
+    /**
+     *
+     * @return Whether or not the device requires sterilization prior to use
+     */
     public boolean isSterilizationPriorToUse() {
         return isSterilizationPriorToUse;
     }
 
+    /**
+     *
+     * @return Whether or not the device is sterile
+     */
     public boolean isSterile() {
         return isSterile;
     }
 
+    /**
+     *
+     * @return The count of devices in its base packaging
+     */
     public int getCountInBasePackage() {
         return countInBasePackage;
     }
 
+    /**
+     *
+     * @return The MRI safety status of the device
+     */
     public String getMRISafety() {
         return MRISafety;
     }
 
+    /**
+     *
+     * @return The record status of the device
+     */
     public String getRecordStatus() {
         return recordStatus;
     }
 
+    /**
+     *
+     * @return The commercial distribution status of the device.
+     */
     public String getCommercialDistributionStatus() {
         return commercialDistributionStatus;
     }
 
+    /**
+     *
+     * @return A description of the device
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return The version or model number of the device
+     */
     public String getVersionOrModelNumber() {
         return versionOrModelNumber;
     }
 
+    /**
+     *
+     * @return The brand name of the device
+     */
     public String getBrandName() {
         return brandName;
     }
 
+    /**
+     *
+     * @return The catalog number of the device
+     */
     public String getCatalogNumber() {
         return catalogNumber;
     }
 
+    /**
+     *
+     * @return The company name of the device
+     */
     public String getCompanyName() {
         return companyName;
     }
 
+    /**
+     *
+     * @return The publish date of the device
+     */
     public Calendar getPublishDate() {
         return publishDate;
     }
 
+    /**
+     *
+     * @return The Device Identifier of the device
+     */
     public String getDeviceIdentifier() {
         return getIdentifier("Primary").getId();
     }
 
+    /**
+     *
+     * @return The types of Identifiers associated with the device. e.g. "Primary", "Package"
+     */
     public Collection<String> getIdentifierTypes(){
         return identifiers.keySet();
     }
 
+    /**
+     *
+     * @param type The type associated with the desired identifier
+     * @return The identifier associated with the type provided
+     */
     public Identifier getIdentifier(String type){
         return identifiers.get(type);
     }
 
+    /**
+     *
+     * @return The types of product codes associated with a device. e.g. "LJS"
+     */
     public Collection<String> getProductCodeTypes(){
         return productCodes.keySet();
     }
 
+    /**
+     * @param type The type associated with the desired product code
+     * @return The product code associated with the type provided
+     */
     public ProductCode getProductCode(String type){
         return productCodes.get(type);
     }
 
+    /**
+     *
+     * @return The types of device sizes associated with a device. e.g. "Length", "Width"
+     */
     public Collection<String> getDeviceSizeTypes(){
         return deviceSizes.keySet();
     }
 
+    /**
+     * @param type The type associated with the desired device size
+     * @return The product size information for the type provided
+     */
     public DeviceSize getDeviceSize(String type){
         return deviceSizes.get(type);
     }
 
+    /**
+     *
+     * @return A list of contact emails associated with the device
+     */
     public Collection<String> getContactEmails(){
         return contactEmails;
     }
 
+    /**
+     *
+     * @return A list of contact phone numbers associated with the device
+     */
     public Collection<String> getContactPhones(){
         return contactPhones;
     }
 
+    /**
+     *
+     * @return The types of storage information associated with a device
+     */
     public Collection<String> getStorageTypes(){
         return deviceStorages.keySet();
     }
 
+    /**
+     * @param type The type associated with the desired device storage information
+     * @return The device storage information associated with the type provided
+     */
     public Storage getStorage(String type){
         return deviceStorages.get(type);
     }

@@ -12,6 +12,7 @@ import okhttp3.Response;
 import udiwrapper.nlm.Device.Device;
 import udiwrapper.nlm.Device.UDIDevice;
 
+@Deprecated
 public class UDIWrapper {
     private static final String DI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?di=";
     private static final String UDI_URL = "https://accessgudid.nlm.nih.gov/api/v1/devices/lookup.json?udi=";

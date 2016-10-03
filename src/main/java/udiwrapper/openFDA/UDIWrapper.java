@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import udiwrapper.openFDA.Device.Device;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
@@ -79,22 +78,43 @@ public class UDIWrapper {
 
     }
 
+    /**
+     *
+     * @return Whether the search corresponds to devices.
+     */
     public boolean getSearchExists(){
         return searchExists;
     }
 
+    /**
+     *
+     * @return A map of Devices with their respective Device Identifiers as their keys.
+     */
     public Map<String, Device> getDevices(){
         return devices;
     }
 
+    /**
+     *
+     * @return A list of the Device Identifiers associated with the returned Devices.
+     */
     public Collection<String> getDeviceIdentifiers(){
         return devices.keySet();
     }
 
+    /**
+     *
+     * @param deviceIdentifier The Device Identifier corresponding to the device being retrieved
+     * @return The {@link Device} associated with the Device Identifier
+     */
     public Device getDevice(String deviceIdentifier){
         return devices.get(deviceIdentifier);
     }
 
+    /**
+     *
+     * @return The total number of devices returned from the search
+     */
     public int getTotal(){
         return total;
     }
@@ -113,10 +133,20 @@ public class UDIWrapper {
         private final String DEFAULT_LIMIT = "1";
         private final String DEFAULT_SKIP = "0";
 
+        /**
+         *
+         * @param apiKey the API Key to be used for the search
+         */
         public Builder(String apiKey) {
             this.apiKey = apiKey;
         }
 
+        /**
+         *
+         * @param searchProperty The device property to search for. If null, the property defaults to the device identifier"
+         * @param searchValue The value of the property to search
+         *
+         */
         public Builder setSearch(String searchProperty, String searchValue){
             if (searchProperty == null) {
                 this.searchProperty = DEFAULT_SEARCH_PROPERTY;
@@ -128,31 +158,60 @@ public class UDIWrapper {
             return this;
         }
 
+        /**
+         *
+         * @param count The device property to count
+         *
+         */
         public Builder setCount(String count){
             this.countValue = count;
             return this;
         }
 
+        /**
+         *
+         * @param limit The number of devices to be returned from a search. e.g. 1
+         *
+         */
         public Builder setLimit(int limit){
             this.limitValue = Integer.toString(limit);
             return this;
         }
 
+        /**
+         *
+         * @param limit The number of devices to be returned from a search. e.g. "1"
+         *
+         */
         public Builder setLimit(String limit){
             this.limitValue = limit;
             return this;
         }
 
+        /**
+         *
+         * @param skip The number of devices to skip before returning devices. e.g. 10
+         *
+         */
         public Builder setSkip(int skip){
             this.skipValue = Integer.toString(skip);
             return this;
         }
 
+        /**
+         *
+         * @param skip The number of devices to skip before returning devices. e.g. "10"
+         *
+         */
         public Builder setSkip(String skip){
             this.skipValue = skip;
             return this;
         }
 
+        /**
+         *
+         * @return The {@link UDIWrapper} being built.
+         */
         public UDIWrapper build() {
             // set defaults if they weren't set by the user
             if (searchProperty == null){

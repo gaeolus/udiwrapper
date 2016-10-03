@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-
+@Deprecated
 public class EnvironmentalCondition {
     private String type;
     private HashMap<String, Condition> conditions = new HashMap<>();
