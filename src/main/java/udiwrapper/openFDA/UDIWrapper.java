@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
 
 public class UDIWrapper {
     private boolean searchExists;
@@ -84,6 +85,14 @@ public class UDIWrapper {
 
     public Map<String, Device> getDevices(){
         return devices;
+    }
+
+    public Collection<String> getDeviceIdentifiers(){
+        return devices.keySet();
+    }
+
+    public Device getDevice(String deviceIdentifier){
+        return devices.get(deviceIdentifier);
     }
 
     public int getTotal(){
