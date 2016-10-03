@@ -165,12 +165,12 @@ public class Device {
                 Storage storage = new Storage(type);
                 String specialConditions = getJSONString("special_conditions", currentStorage);
                 if (specialConditions != null) storage.setSpecialConditions(specialConditions);
-                if (currentStorage.has("high"){
+                if (currentStorage.has("high")){
                     int highValue = getJSONInt("value", currentStorage.getJSONObject("high"));
                     String highUnit = getJSONString("unit", currentStorage.getJSONObject("high"));
                     storage.setHigh(highValue, highUnit);
                 }
-                if (currentStorage.has("low"){
+                if (currentStorage.has("low")){
                     int lowValue = getJSONInt("value", currentStorage.getJSONObject("low"));
                     String lowUnit = getJSONString("unit", currentStorage.getJSONObject("low"));
                     storage.setLow(lowValue, lowUnit);
