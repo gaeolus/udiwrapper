@@ -71,7 +71,7 @@ public class openFDAWrapperTests {
     }
 
     @Test
-    public void testGetDeviceWithKey{
+    public void testGetDeviceWithKey(){
         UDIWrapper udiWrapper = builder
                 .setSearch("identifiers.id", "08717648200274")
                 .build();
