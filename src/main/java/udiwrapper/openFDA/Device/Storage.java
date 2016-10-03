@@ -12,19 +12,13 @@ public class Storage{
         this.type = type;
     }
 
-    void setHighValue(int value){
+    void setHigh(int value, String unit){
         this.highValue = value;
-    }
-
-    void setHighUnit(String unit){
         this.highUnit = unit;
     }
 
-    void setLowValue(int value){
+    void setLow(int value, String unit){
         this.lowValue = value;
-    }
-
-    void setLowUnit(String unit){
         this.lowUnit = unit;
     }
 
