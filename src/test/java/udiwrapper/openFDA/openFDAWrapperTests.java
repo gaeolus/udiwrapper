@@ -77,4 +77,16 @@ public class openFDAWrapperTests {
                 .build();
         assertEquals("XIENCE ALPINE", udiWrapper.getDevice("08717648200274").getBrandName());
     }
+
+    @Test
+    public void testAlterSearch(){
+        UDIWrapper udiWrapper = builder
+                .setSearch(null, "08717648200274")
+                .build();
+
+        assertTrue(udiWrapper.getSearchExists());
+
+        udiWrapper.alterSearch(null, "badidentifier", null, null);
+        assertFalse(udiWrapper.getSearchExists());
+    }
 }
