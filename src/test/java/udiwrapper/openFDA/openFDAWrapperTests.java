@@ -67,7 +67,7 @@ public class openFDAWrapperTests {
         UDIWrapper udiWrapper = builder
                 .setSearch("identifiers.id", "08717648200274")
                 .build();
-        assertTrue(udiWrapper.getDeviceKeys().contains("08717648200274"));
+        assertTrue(udiWrapper.getDeviceIdentifiers().contains("08717648200274"));
     }
 
     @Test
