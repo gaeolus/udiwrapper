@@ -83,67 +83,75 @@ public class Device {
         }
 
         identifiers = new HashMap<>();
-        JSONArray identifiersArray = deviceJSON.getJSONArray("identifiers");
-        for (int i = 0; i < identifiersArray.length() ; i += 1){
-            JSONObject currentIdentifier = identifiersArray.getJSONObject(i);
-            String type = getJSONString("type", currentIdentifier);
-            String issuingAgency = getJSONString("issuing_agency", currentIdentifier);
-            String id = getJSONString("id", currentIdentifier);
-            String packageStatus = getJSONString("package_status", currentIdentifier);
-            String unitOfUseId = getJSONString("unit_of_use_id", currentIdentifier);
-            int quantityPerPackage = getJSONInt("quantity_per_package", currentIdentifier);
+        JSONArray identifiersArray = getJSONArray("identifiers", deviceJSON);
+        if (identifiersArray != null){
+            for (int i = 0; i < identifiersArray.length() ; i += 1){
+                JSONObject currentIdentifier = identifiersArray.getJSONObject(i);
+                String type = getJSONString("type", currentIdentifier);
+                String issuingAgency = getJSONString("issuing_agency", currentIdentifier);
+                String id = getJSONString("id", currentIdentifier);
+                String packageStatus = getJSONString("package_status", currentIdentifier);
+                String unitOfUseId = getJSONString("unit_of_use_id", currentIdentifier);
+                int quantityPerPackage = getJSONInt("quantity_per_package", currentIdentifier);
 
-            Identifier thisIdentifier = new Identifier(type, issuingAgency, id);
-            if (packageStatus != null) thisIdentifier.setPackageStatus(packageStatus);
-            if (unitOfUseId != null) thisIdentifier.setUnitOfUseId(unitOfUseId);
-            if (quantityPerPackage != 0) thisIdentifier.setQuantityPerPackage(quantityPerPackage);
+                Identifier thisIdentifier = new Identifier(type, issuingAgency, id);
+                if (packageStatus != null) thisIdentifier.setPackageStatus(packageStatus);
+                if (unitOfUseId != null) thisIdentifier.setUnitOfUseId(unitOfUseId);
+                if (quantityPerPackage != 0) thisIdentifier.setQuantityPerPackage(quantityPerPackage);
 
-            identifiers.put(thisIdentifier.getType(), thisIdentifier);
+                identifiers.put(thisIdentifier.getType(), thisIdentifier);
+            }
         }
 
         productCodes = new HashMap<>();
-        JSONArray productCodeArray = deviceJSON.getJSONArray("product_codes");
-        for (int i = 0; i < productCodeArray.length() ; i += 1){
-            JSONObject currentProductCode = productCodeArray.getJSONObject(i);
-            String code = getJSONString("code", currentProductCode);
-            String name = getJSONString("name", currentProductCode);
-            JSONObject openFDAObject = currentProductCode.getJSONObject("openfda");
-            String openFDAName = getJSONString("device_name", openFDAObject);
-            String openFDASpecialty = getJSONString("medical_specialty_description", openFDAObject);
-            String openFDADeviceClass = getJSONString("device_class", openFDAObject);
-            String openFDARegulationNumber = getJSONString("regulation_number", openFDAObject);
+        JSONArray productCodeArray = getJSONArray("product_codes", deviceJSON);
+        if (productCodeArray != null){
+            for (int i = 0; i < productCodeArray.length() ; i += 1){
+                JSONObject currentProductCode = productCodeArray.getJSONObject(i);
+                String code = getJSONString("code", currentProductCode);
+                String name = getJSONString("name", currentProductCode);
+                JSONObject openFDAObject = currentProductCode.getJSONObject("openfda");
+                String openFDAName = getJSONString("device_name", openFDAObject);
+                String openFDASpecialty = getJSONString("medical_specialty_description", openFDAObject);
+                String openFDADeviceClass = getJSONString("device_class", openFDAObject);
+                String openFDARegulationNumber = getJSONString("regulation_number", openFDAObject);
 
-            ProductCode thisProductCode = new ProductCode(code, name);
-            if (openFDAName != null) thisProductCode.setOpenFDAName(openFDAName);
-            if (openFDASpecialty != null) thisProductCode.setOpenFDASpecialtyDescription(openFDASpecialty);
-            if (openFDADeviceClass != null) thisProductCode.setOpenFDADeviceClass(openFDADeviceClass);
-            if (openFDARegulationNumber != null) thisProductCode.setOpenFDARegulationNumber(openFDARegulationNumber);
+                ProductCode thisProductCode = new ProductCode(code, name);
+                if (openFDAName != null) thisProductCode.setOpenFDAName(openFDAName);
+                if (openFDASpecialty != null) thisProductCode.setOpenFDASpecialtyDescription(openFDASpecialty);
+                if (openFDADeviceClass != null) thisProductCode.setOpenFDADeviceClass(openFDADeviceClass);
+                if (openFDARegulationNumber != null) thisProductCode.setOpenFDARegulationNumber(openFDARegulationNumber);
 
-            productCodes.put(thisProductCode.getCode(), thisProductCode);
+                productCodes.put(thisProductCode.getCode(), thisProductCode);
+            }
         }
 
         contactEmails = new ArrayList<>();
         contactPhones = new ArrayList<>();
-        JSONArray contacts = deviceJSON.getJSONArray("customer_contacts");
-        for (int i = 0; i < contacts.length(); i += 1){
-            JSONObject currentContactInfo = contacts.getJSONObject(i);
-            String thisPhone = getJSONString("phone", currentContactInfo);
-            String thisEmail = getJSONString("email", currentContactInfo);
-            contactEmails.add(thisEmail);
-            contactPhones.add(thisPhone);
+        JSONArray contacts = getJSONArray("customer_contacts", deviceJSON);
+        if (contacts != null){
+            for (int i = 0; i < contacts.length(); i += 1){
+                JSONObject currentContactInfo = contacts.getJSONObject(i);
+                String thisPhone = getJSONString("phone", currentContactInfo);
+                String thisEmail = getJSONString("email", currentContactInfo);
+                contactEmails.add(thisEmail);
+                contactPhones.add(thisPhone);
+            }
         }
 
         deviceSizes = new HashMap<>();
-        JSONArray deviceSizeArray = deviceJSON.getJSONArray("device_sizes");
-        for (int i = 0; i < deviceSizeArray.length(); i += 1){
-            JSONObject currentSize = deviceSizeArray.getJSONObject(i);
-            String type = getJSONString("type", currentSize);
-            String unit = getJSONString("unit", currentSize);
-            String value = getJSONString("value", currentSize);
+        JSONArray deviceSizeArray = getJSONArray("device_sizes", deviceJSON);
+        if (deviceSizeArray != null){
+            for (int i = 0; i < deviceSizeArray.length(); i += 1){
+                JSONObject currentSize = deviceSizeArray.getJSONObject(i);
+                String type = getJSONString("type", currentSize);
+                String unit = getJSONString("unit", currentSize);
+                String value = getJSONString("value", currentSize);
 
-            DeviceSize deviceSize = new DeviceSize(type, unit, value);
+                DeviceSize deviceSize = new DeviceSize(type, unit, value);
 
-            deviceSizes.put(deviceSize.getType(), deviceSize);
+                deviceSizes.put(deviceSize.getType(), deviceSize);
+            }
         }
 
     }
@@ -165,6 +173,13 @@ public class Device {
     private String getJSONString(String JsonKey, JSONObject deviceJson){
         if (deviceJson.has(JsonKey)){
             return deviceJson.getString(JsonKey);
+        }
+        return null;
+    }
+
+    private JSONArray getJSONArray(String JsonKey, JSONObject deviceJson){
+        if (deviceJson.has(JsonKey)){
+            return deviceJson.getJSONArray(JsonKey);
         }
         return null;
     }
