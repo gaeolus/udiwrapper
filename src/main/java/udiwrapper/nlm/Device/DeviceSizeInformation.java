@@ -3,6 +3,7 @@ package udiwrapper.nlm.Device;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Deprecated
 public class DeviceSizeInformation {
     private String type;
     private NameValuePair size;

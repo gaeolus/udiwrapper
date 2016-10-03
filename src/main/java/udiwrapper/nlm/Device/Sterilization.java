@@ -3,6 +3,7 @@ package udiwrapper.nlm.Device;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Deprecated
 public class Sterilization {
     private boolean deviceSterile;
     private boolean sterilizePriorToUse;

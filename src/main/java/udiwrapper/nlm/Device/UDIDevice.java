@@ -11,6 +11,7 @@ import java.util.Locale;
 
 import okhttp3.Headers;
 
+@Deprecated
 public class UDIDevice extends Device {
     private String udi;
     private String di;

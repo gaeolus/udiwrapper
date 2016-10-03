@@ -22,6 +22,8 @@ import java.util.Locale;
  * device_lookup API.
  * </a>}
  */
+
+@Deprecated
 public class Device {
     // deliberately omitting GMDNTerm field because of their copyright statement
     // https://www.gmdnagency.org/Info.aspx?pageid=22

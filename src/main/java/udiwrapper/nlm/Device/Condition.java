@@ -3,6 +3,7 @@ package udiwrapper.nlm.Device;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Deprecated
 public class Condition {
     private String type;
     private NameValuePair high;

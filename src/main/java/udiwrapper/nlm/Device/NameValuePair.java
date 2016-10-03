@@ -1,5 +1,6 @@
 package udiwrapper.nlm.Device;
 
+@Deprecated
 public class NameValuePair {
     private String unit;
     private String value;

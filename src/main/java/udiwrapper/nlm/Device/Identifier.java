@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+@Deprecated
 public class Identifier {
     private String deviceId;
     private String deviceIdType;
