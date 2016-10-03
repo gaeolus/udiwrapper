@@ -237,8 +237,8 @@ public class openFDADeviceTests {
     @Test
     public void testDeviceStorage(){
         assertTrue(deviceWithStorage.getStorageTypes().contains("Handling Environment Temperature"));
-        assertTrue(deviceWithStorage.getStorageTypes().contains("Special Storage Condition, Specify");
-        assertTrue(deviceWithStorage.getStorageTypes().contains("Storage Environment Temperature");
+        assertTrue(deviceWithStorage.getStorageTypes().contains("Special Storage Condition, Specify"));
+        assertTrue(deviceWithStorage.getStorageTypes().contains("Storage Environment Temperature"));
 
         String unit = "Degrees Celsius";
         int fifteen = 15;
