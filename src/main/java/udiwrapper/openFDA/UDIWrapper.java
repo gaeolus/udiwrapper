@@ -13,7 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
 
-public class UDIWrapper {
+class UDIWrapper {
+    private String apiKey;
+    private String searchProperty;
+    private String searchValue;
+    private String limitValue;
+    private String skipValue;
+    private String countValue;
+
     private boolean searchExists;
     private int total;
     private Map<String, Device> devices;
@@ -25,6 +32,30 @@ public class UDIWrapper {
                        String limitValue,
                        String skipValue){
 
+        this.apiKey = apiKey;
+        this.searchProperty = searchProperty;
+        this.searchValue = searchValue;
+        this.limitValue = limitValue;
+        this.skipValue = skipValue;
+        this.countValue = countValue;
+
+        performSearch();
+
+    }
+
+    public void alterSearch(String searchProperty,
+                            String searchValue,
+                            String limitValue,
+                            String skipValue){
+        if (searchProperty != null) this.searchProperty = searchProperty;
+        if (searchValue != null) this.searchValue = searchValue;
+        if (limitValue != null) this.limitValue = limitValue;
+        if (skipValue != null) this.skipValue = skipValue;
+
+        performSearch();
+    }
+
+    private void performSearch(){
         String SEARCH = "search";
         String COUNT = "count";
         String SKIP = "skip";
