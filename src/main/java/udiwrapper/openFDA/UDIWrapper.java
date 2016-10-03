@@ -86,6 +86,14 @@ public class UDIWrapper {
         return devices;
     }
 
+    public Collection<String> getDeviceIdentifiers(){
+        return devices.keySet();
+    }
+
+    public Device getDevice(String deviceIdentifier){
+        return devices.get(deviceIdentifier);
+    }
+
     public int getTotal(){
         return total;
     }
