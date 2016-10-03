@@ -40,6 +40,7 @@ public class Device {
     private Map<String, Identifier> identifiers;
     private Map<String, ProductCode> productCodes;
     private Map<String, DeviceSize> deviceSizes;
+    private Map<String, Storage> deviceStorages;
 
     public Device(JSONObject deviceJSON){
         hasDonationId = getJSONBoolean("has_donation_id_number", deviceJSON);
@@ -151,6 +152,30 @@ public class Device {
                 DeviceSize deviceSize = new DeviceSize(type, unit, value);
 
                 deviceSizes.put(deviceSize.getType(), deviceSize);
+            }
+        }
+
+        deviceStorages = new HashMap<>();
+        JSONArray deviceStorageArray = getJSONArray("storage", deviceJSON);
+        if (deviceStorageArray != null){
+            for (int i = 0; i < deviceStorageArray.length(); i += 1){
+                JSONObject currentStorage = deviceStorageArray.getJSONObject(i);
+                String type = getJSONString("type", currentStorage);
+
+                Storage storage = new Storage(type);
+                String specialConditions = getJSONString("special_conditions", currentStorage);
+                if (specialConditions != null) storage.setSpecialConditions(specialConditions);
+                if (currentStorage.has("high"){
+                    int highValue = getJSONInt("value", currentStorage.getJSONObject("high"));
+                    String highUnit = getJSONString("unit", currentStorage.getJSONObject("high"));
+                    storage.setHigh(highValue, highUnit);
+                }
+                if (currentStorage.has("low"){
+                    int lowValue = getJSONInt("value", currentStorage.getJSONObject("low"));
+                    String lowUnit = getJSONString("unit", currentStorage.getJSONObject("low"));
+                    storage.setLow(lowValue, lowUnit);
+                }
+                deviceStorages.put(storage.getType(), storage);
             }
         }
 
@@ -327,4 +352,13 @@ public class Device {
     public Collection<String> getContactPhones(){
         return contactPhones;
     }
+
+    public Collection<String> getStorageTypes(){
+        return deviceStorages.keySet();
+    }
+
+    public Storage getStorage(String type){
+        return deviceStorages.get(type);
+    }
+
 }
