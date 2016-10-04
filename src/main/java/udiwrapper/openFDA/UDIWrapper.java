@@ -19,7 +19,6 @@ public class UDIWrapper {
     private String searchValue;
     private String limitValue;
     private String skipValue;
-    private String countValue;
 
     private boolean searchExists;
     private int total;
@@ -28,7 +27,6 @@ public class UDIWrapper {
     private UDIWrapper(String apiKey,
                        String searchProperty,
                        String searchValue,
-                       String countValue,
                        String limitValue,
                        String skipValue){
 
@@ -37,7 +35,6 @@ public class UDIWrapper {
         this.searchValue = searchValue;
         this.limitValue = limitValue;
         this.skipValue = skipValue;
-        this.countValue = countValue;
 
         performSearch();
 
@@ -57,7 +54,6 @@ public class UDIWrapper {
 
     private void performSearch(){
         String SEARCH = "search";
-        String COUNT = "count";
         String SKIP = "skip";
         String LIMIT = "limit";
         String FDA_SCHEME = "https";
@@ -72,7 +68,6 @@ public class UDIWrapper {
                 .addPathSegment(FDA_UDI)
                 .addQueryParameter(API_KEY, apiKey)
                 .addQueryParameter(SEARCH, searchProperty + ":" + searchValue)
-                .addQueryParameter(COUNT, countValue)
                 .addQueryParameter(LIMIT, limitValue)
                 .addQueryParameter(SKIP, skipValue)
                 .build();
@@ -88,7 +83,7 @@ public class UDIWrapper {
         try {
             Response response = client.newCall(request).execute();
             searchExists = (response.code() == 200);
-            if (searchExists && countValue.isEmpty()) {
+            if (searchExists) {
                 JSONObject baseJSON = new JSONObject(response.body().string());
                 JSONObject metaObject = baseJSON.getJSONObject("meta");
                 JSONArray resultsArray = baseJSON.getJSONArray("results");
@@ -154,7 +149,6 @@ public class UDIWrapper {
         private String apiKey;
         private String searchProperty;
         private String searchValue;
-        private String countValue;
         private String limitValue;
         private String skipValue;
 
@@ -186,16 +180,6 @@ public class UDIWrapper {
             }
 
             this.searchValue = searchValue;
-            return this;
-        }
-
-        /**
-         *
-         * @param count The device property to count
-         *
-         */
-        public Builder setCount(String count){
-            this.countValue = count;
             return this;
         }
 
@@ -248,20 +232,11 @@ public class UDIWrapper {
             if (searchProperty == null){
                 searchProperty = DEFAULT_SEARCH_PROPERTY;
             }
-            if (countValue == null){
-                countValue = DEFAULT_COUNT;
-            }
             if (limitValue == null){
                 limitValue = DEFAULT_LIMIT;
             }
             if (skipValue == null){
                 skipValue = DEFAULT_SKIP;
-            }
-
-            // count and skip can't be used together. If they're both set, throw
-            // a new exception
-            if (!countValue.isEmpty() && !skipValue.equals("0")){
-                throw new IllegalArgumentException("You must pick either count OR skip. You cannot use both");
             }
 
             // don't allow the api key to be null
@@ -277,7 +252,6 @@ public class UDIWrapper {
             return new UDIWrapper(apiKey,
                     searchProperty,
                     searchValue,
-                    countValue,
                     limitValue,
                     skipValue);
         }

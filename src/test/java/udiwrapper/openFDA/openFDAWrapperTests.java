@@ -54,15 +54,6 @@ public class openFDAWrapperTests {
     }
 
     @Test
-    public void testCounting(){
-        UDIWrapper udiWrapper = builder
-                .setSearch("brand_name", "XIENCE")
-                .setCount("brand_name")
-                .build();
-        assertTrue(udiWrapper.getSearchExists());
-    }
-
-    @Test
     public void testGetDeviceKeys(){
         UDIWrapper udiWrapper = builder
                 .setSearch("identifiers.id", "08717648200274")
