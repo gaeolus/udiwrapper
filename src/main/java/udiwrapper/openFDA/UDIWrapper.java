@@ -154,7 +154,6 @@ public class UDIWrapper {
 
         // default constants
         private final String DEFAULT_SEARCH_PROPERTY = "identifiers.id";
-        private final String DEFAULT_COUNT = "";
         private final String DEFAULT_LIMIT = "1";
         private final String DEFAULT_SKIP = "0";
 
