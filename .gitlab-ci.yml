@@ -11,5 +11,8 @@ build:
 
 test:
   stage: test
+  only:
+    - master
+    - develop
   script:
   - gradle test
