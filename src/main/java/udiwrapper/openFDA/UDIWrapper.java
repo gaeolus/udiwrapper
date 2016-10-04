@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
 
-class UDIWrapper {
+public class UDIWrapper {
     private String apiKey;
     private String searchProperty;
     private String searchValue;
