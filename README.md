@@ -36,7 +36,7 @@ import udiwrapper.openFDA.Device
 String myApiKey = "YOUR_API_KEY";
 String deviceId = "08717648200274";
 
-//setting search to null searches for device IDs
+//setting search to null defaults the search property to device ID
 UDIWrapper mUDIWrapper = new UDIWrapper.Builder(myApiKey)
                                         .setSearch(null, deviceId)
                                         .build();
@@ -64,15 +64,29 @@ With 2.0.0, you can search for any device property you want:
 ```java
 
 UDIWrapper brandSearch = new UDIWrapper.Builder(myApiKey)
-                                        .setSearch("brand_name", "Cool")
-                                        .setLimit(10)
-                                        .build();
-                                        
-UDIWrapper companySearch = new UDIWrapper.Builder(myApiKey)
-                                        .setSearch("company_name", "ACME")
+                                        .setSearch(UDIWrapper.DeviceProperties.COMPANY_NAME, "Cool")
                                         .setLimit(10)
                                         .build();
 
+```
+You can also alter the search:
+```java
+// Get the first ten results from a search
+UDIWrapper brandSearch = new UDIWrapper.Builder(myApiKey)
+                                        .setSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE")
+                                        .setLimit(10)
+                                        .build();
+                                        
+Iterator<String> iterator = udiWrapper.getDeviceIdentifiers().iterator();
+while (iterator.hasNext()){
+    Device device = udiWrapper.getDevice(iterator.next());
+    // do something with each device
+}
+
+// alter the search. If you set the argument as null, that parameter won't be altered
+// alterSearch(String searchValue, String searchProperty, String limit, String skip)
+// This skips the first ten results
+brandSearch.alterSearch(null, null, null, 10);
 ```
 # Documentation
 Check [the documentation](https://bensmith41.github.io/udiwrapper) for more information.
