@@ -14,8 +14,90 @@ import java.util.Map;
 import java.util.*;
 
 public class UDIWrapper {
+    public enum DeviceProperties{
+        BRAND_NAME ("brand_name"),
+        BRAND_NAME_EXACT ("brand_name.exact"),
+        CATALOG_NUMBER ("catalog_number"),
+        CATALOG_NUMBER_EXACT ("catalog_number"),
+        COMMERCIAL_DISTRIBUTION_DATE ("commercial_distribution_end_date"),
+        COMMERCIAL_DISTRIBUTION_STATUS ("commercial_distribution_status"),
+        COMMERCIAL_DISTRIBUTION_STATUS_EXACT ("commercial_distribution_status.exact"),
+        COMPANY_NAME ("company_name"),
+        COMPANY_NAME_EXACT ("company_name.exact"),
+        DEVICE_COUNT_IN_BASE_PACKAGE ("device_count_in_base_package"),
+        DEVICE_DESCRIPTION ("device_description"),
+        HAS_DONATION_ID_NUMBER ("has_donation_id_number"),
+        HAS_EXPIRATION_DATE ("has_expiration_date"),
+        HAS_LOT_OR_BATCH_NUMBER ("has_lot_or_batch_number"),
+        HAS_MANUFACTURING_DATE ("has_manufacturing_date"),
+        HAS_SERIAL_NUMBER ("has_serial_date"),
+        IS_COMBINATION_PRODUCT ("is_combination_product"),
+        IS_DIRECT_MARKING_EXEMPT ("is_direct_marking_exempt"),
+        IS_HCTP ("is_hct_p"),
+        IS_KIT ("is_kit"),
+        IS_LABELED_AS_NO_NRL ("is_labeled_as_no_nrl"),
+        IS_LABELED_AS_NRL ("is_labeled_as_nrl"),
+        IS_OTC ("is_otc"),
+        IS_PM_EXEMPT ("is_pm_exempt"),
+        IS_RX ("is_rx"),
+        IS_SINGLE_USE ("is_single_use"),
+        MRI_SAFETY ("mri_safety"),
+        MRI_SAFETY_EXACT ("mri_safety.exact"),
+        PUBLISH_DATE ("publish_date"),
+        RECORD_STATUS ("record_status"),
+        IS_STERILE ("sterilization.is_sterile"),
+        IS_STERILIZATION_PRIOR_USE ("sterilization.is_sterilization_prior_use"),
+        STERILIZATION_METHODS ("sterilization.sterilization_methods"),
+        PRODUCT_CODE ("product_codes.code"),
+        PRODUCT_CODE_EXACT ("product_codes.code.exact"),
+        PRODUCT_CODE_NAME ("product_codes.name"),
+        VERSION_OR_MODEL_NUMBER ("version_or_model_number"),
+        VERSION_OR_MODEL_NUMBER_EXACT ("version_or_model_number.exact"),
+        IDENTIFIER ("identifiers.id"),
+        IDENTIFIER_ISSUING_AGENCY ("identifiers.issuing_agency"),
+        PACKAGE_DISCONTINUE_DATE ("identifiers.package_discontinue_date"),
+        PACKAGE_STATUS ("identifiers.package_status"),
+        PACKAGE_STATUS_EXACT ("identifiers.package_status.exact"),
+        QUANTITY_PER_PACKAGE ("identifiers.quantity_per_package"),
+        IDENTIFIER_TYPE ("identifiers.type"),
+        UNIT_OF_USE_ID ("identifiers.unit_of_use_id"),
+        CONTACT_EMAIL ("customer_contacts.email"),
+        CONTACT_PHONE ("customer_contacts.phone"),
+        DEVICE_SIZE_TEXT ("device_sizes.text"),
+        DEVICE_SIZE_TYPE ("device_sizes.type"),
+        DEVICE_SIZE_TYPE_EXACT ("device_sizes.type.exact"),
+        DEVICE_SIZE_VALUE ("device_sizes.value"),
+        DEVICE_SIZES_UNIT ("device_sizes.unit"),
+        STORAGE_HIGH_VALUE ("storage.high.value"),
+        STORAGE_HIGH_UNIT ("storage.high.unit"),
+        STORAGE_LOW_VALUE ("storage.low.value"),
+        STORAGE_LOW_UNIT ("storage.low.unit"),
+        STORAGE_SPECIAL_CONDITIONS ("storage.special_conditions"),
+        STORAGE_TYPE ("storage.type"),
+        STORAGE_TYPE_EXACT ("storage.type.exact"),
+        OPENFDA_DEVICE_CLASS ("device_class"),
+        OPENFDA_DEVICE_NAME ("device_name"),
+        OPENFDA_DEVICE_NAME_EXACT ("device_name.exact"),
+        OPENFDA_MEDICAL_SPECIALTY_DESCRIPTION ("medical_specialty_description"),
+        OPENFDA_MEDICAL_SPECIALTY_DESCRIPTION_EXACT ("medical_specialty_description.exact"),
+        OPENFDA_REGULATION_NUMBER ("regulation_number"),
+        OPENFDA_REGULATION_NUMBER_EXACT ("regulation_number.exact"),
+
+
+        ;
+        private final String constant;
+
+        private DeviceProperties(String constant){
+            this.constant = constant;
+        }
+
+        @Override
+        public String toString() {
+            return this.constant;
+        }
+    }
     private String apiKey;
-    private String searchProperty;
+    private DeviceProperties searchProperty;
     private String searchValue;
     private String limitValue;
     private String skipValue;
@@ -25,7 +107,7 @@ public class UDIWrapper {
     private Map<String, Device> devices;
 
     private UDIWrapper(String apiKey,
-                       String searchProperty,
+                       DeviceProperties searchProperty,
                        String searchValue,
                        String limitValue,
                        String skipValue){
@@ -40,7 +122,7 @@ public class UDIWrapper {
 
     }
 
-    public void alterSearch(String searchProperty,
+    public void alterSearch(DeviceProperties searchProperty,
                             String searchValue,
                             String limitValue,
                             String skipValue){
@@ -147,14 +229,13 @@ public class UDIWrapper {
 
     public static class Builder {
         private String apiKey;
-        private String searchProperty;
+        private DeviceProperties searchProperty;
         private String searchValue;
         private String limitValue;
         private String skipValue;
 
         // default constants
-        private final String DEFAULT_SEARCH_PROPERTY = "identifiers.id";
-        private final String DEFAULT_COUNT = "";
+        private final DeviceProperties DEFAULT_SEARCH_PROPERTY = DeviceProperties.IDENTIFIER;
         private final String DEFAULT_LIMIT = "1";
         private final String DEFAULT_SKIP = "0";
 
@@ -172,7 +253,7 @@ public class UDIWrapper {
          * @param searchValue The value of the property to search
          *
          */
-        public Builder setSearch(String searchProperty, String searchValue){
+        public Builder setSearch(DeviceProperties searchProperty, String searchValue){
             if (searchProperty == null) {
                 this.searchProperty = DEFAULT_SEARCH_PROPERTY;
             } else {
