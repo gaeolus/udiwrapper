@@ -6,7 +6,7 @@
 
     <groupId>com.smithsocial</groupId>
     <artifactId>udiwrapper</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A java wrapper for the National Library of Medicine's Device Look Up API</description>
