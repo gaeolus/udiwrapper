@@ -122,6 +122,13 @@ public class UDIWrapper {
 
     }
 
+    /**
+     * Alter the search that was originally set by the builder
+     * @param searchProperty The search property. If null, the search property doesn't change.
+     * @param searchValue The search value. If null, the search value doesn't change.
+     * @param limitValue The limit. If null, the limit doesn't change.
+     * @param skipValue The amount of devices to skip. If null, the devices to skip doesn't change.
+     */
     public void alterSearch(DeviceProperties searchProperty,
                             String searchValue,
                             String limitValue,
