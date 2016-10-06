@@ -8,6 +8,7 @@ build:
   stage: build
   script:
   - gradle assemble
+  - gradle compileTestJava
 
 test:
   stage: test
