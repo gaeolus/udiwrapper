@@ -45,7 +45,7 @@ public class openFDAWrapperTests {
 
     @Test
     public void testSkipping(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE", null, 10);
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE", null, "10");
         assertTrue(udiWrapper.getSearchExists());
     }
 
@@ -63,13 +63,13 @@ public class openFDAWrapperTests {
 
     @Test
     public void testAlterSearch(){
-        UDIWrapper udiWrapper = builder
+        UDIWrapper udiWrapperTest = builder
                 .setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274")
                 .build();
 
-        assertTrue(udiWrapper.getSearchExists());
+        assertTrue(udiWrapperTest.getSearchExists());
 
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "badidentifier", null, null);
-        assertFalse(udiWrapper.getSearchExists());
+        udiWrapperTest.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "badidentifier", null, null);
+        assertFalse(udiWrapperTest.getSearchExists());
     }
 }
