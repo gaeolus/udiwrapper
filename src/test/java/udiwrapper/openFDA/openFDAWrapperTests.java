@@ -12,6 +12,7 @@ class Environment {
 public class openFDAWrapperTests {
     private String apiKey = new Environment().getFdaApiKey();
     private UDIWrapper.Builder builder = new UDIWrapper.Builder(apiKey);
+    private UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274").build();
 
     @Test
     public void testApiKeyNotNull(){
@@ -20,51 +21,43 @@ public class openFDAWrapperTests {
 
     @Test
     public void testGoodDiExists(){
-        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274").build();
         assertTrue(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testBadDiExists(){
-        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "test").build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "test", null, null);
         assertFalse(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testDefaultSearch(){
-        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274").build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274", null, null);
         assertNotNull(udiWrapper.getDevices());
     }
 
     @Test
     public void testSearching(){
-        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE").build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE", null, null);
         int numberReturned = 262;
         assertEquals(numberReturned, udiWrapper.getTotal());
     }
 
     @Test
     public void testSkipping(){
-        UDIWrapper udiWrapper = builder
-                .setSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE")
-                .setSkip(261)
-                .build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "XIENCE", null, 10);
         assertTrue(udiWrapper.getSearchExists());
     }
 
     @Test
     public void testGetDeviceKeys(){
-        UDIWrapper udiWrapper = builder
-                .setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274")
-                .build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274", null, "0");
         assertTrue(udiWrapper.getDeviceIdentifiers().contains("08717648200274"));
     }
 
     @Test
     public void testGetDeviceWithKey(){
-        UDIWrapper udiWrapper = builder
-                .setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274")
-                .build();
+        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "08717648200274", null, null);
         assertEquals("XIENCE ALPINE", udiWrapper.getDevice("08717648200274").getBrandName());
     }
 
