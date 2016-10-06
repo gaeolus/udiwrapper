@@ -187,6 +187,8 @@ public class UDIWrapper {
                 }
 
             }
+
+            response.body().close();
         } catch (IOException e) {
             e.printStackTrace();
         }
