@@ -181,11 +181,8 @@ public class Device {
 
     }
 
-    private boolean getJSONBoolean(String JsonKey, JSONObject deviceJson){
-        if (deviceJson.has(JsonKey)){
-            return deviceJson.getBoolean(JsonKey);
-        }
-        return false;
+    private boolean getJSONBoolean(String JsonKey, JSONObject deviceJson) {
+        return deviceJson.has(JsonKey) && deviceJson.getBoolean(JsonKey);
     }
 
     private int getJSONInt(String JsonKey, JSONObject deviceJson){
