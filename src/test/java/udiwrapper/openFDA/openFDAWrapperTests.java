@@ -1,7 +1,6 @@
 package udiwrapper.openFDA;
 
 import org.junit.Test;
-import udiwrapper.openFDA.Device.AdverseDevice;
 
 import static org.junit.Assert.*;
 
@@ -73,5 +72,15 @@ public class openFDAWrapperTests {
 
         udiWrapperTest.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "badidentifier", null, null);
         assertFalse(udiWrapperTest.getSearchExists());
+    }
+
+    @Test
+    public void testAdverseEventTotal(){
+        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi).build();
+
+        assertEquals(2, udiWrapper.getTotalAdverseEvents(goodDi));
+
+        // test it again
+        assertEquals(2, udiWrapper.getTotalAdverseEvents(goodDi));
     }
 }
