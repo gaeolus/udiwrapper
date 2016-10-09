@@ -12,8 +12,10 @@ class Environment {
 public class openFDAWrapperTests {
     private String apiKey = new Environment().getFdaApiKey();
     private UDIWrapper.Builder builder = new UDIWrapper.Builder(apiKey);
-    private UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "00851788001273").build();
     private String goodDi = "00851788001273";
+    private String badDi = "something";
+    private UDIWrapper goodWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi).build();
+    private UDIWrapper badWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, badDi).build();
 
     @Test
     public void testApiKeyNotNull(){
@@ -21,66 +23,44 @@ public class openFDAWrapperTests {
     }
 
     @Test
-    public void testGoodDiExists(){
-        assertTrue(udiWrapper.getSearchExists());
-    }
-
-    @Test
     public void testBadDiExists(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "test", null, null);
-        assertFalse(udiWrapper.getSearchExists());
+        assertFalse(badWrapper.getSearchExists());
     }
 
     @Test
-    public void testDefaultSearch(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi, null, null);
-        assertNotNull(udiWrapper.getDevices());
-    }
-
-    @Test
-    public void testSearching(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "X", null, null);
-        int numberReturned = 7367;
-        assertEquals(numberReturned, udiWrapper.getTotal());
-    }
-
-    @Test
-    public void testSkipping(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "X", null, "10");
-        assertTrue(udiWrapper.getSearchExists());
+    public void testGoodDiExists(){
+        assertTrue(goodWrapper.getSearchExists());
     }
 
     @Test
     public void testGetDeviceKeys(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi, null, "0");
-        assertTrue(udiWrapper.getDeviceIdentifiers().contains(goodDi));
+        assertTrue(goodWrapper.getDeviceIdentifiers().contains(goodDi));
     }
 
     @Test
     public void testGetDeviceWithKey(){
-        udiWrapper.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi, null, null);
-        assertEquals("On-X Mitral Heart Valve with Standard Sewing Ring", udiWrapper.getDevice(goodDi).getBrandName());
+        assertEquals("On-X Mitral Heart Valve with Standard Sewing Ring", goodWrapper.getDevice(goodDi).getBrandName());
     }
 
     @Test
-    public void testAlterSearch(){
-        UDIWrapper udiWrapperTest = builder
-                .setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi)
-                .build();
-
-        assertTrue(udiWrapperTest.getSearchExists());
-
-        udiWrapperTest.alterSearch(UDIWrapper.DeviceProperties.IDENTIFIER, "badidentifier", null, null);
-        assertFalse(udiWrapperTest.getSearchExists());
+    public void testDefaultSearch(){
+        assertNotNull(goodWrapper.getDevices());
     }
 
     @Test
     public void testAdverseEventTotal(){
-        UDIWrapper udiWrapper = builder.setSearch(UDIWrapper.DeviceProperties.IDENTIFIER, goodDi).build();
-
-        assertEquals(2, udiWrapper.getTotalAdverseEvents(goodDi));
-
         // test it again
-        assertEquals(2, udiWrapper.getTotalAdverseEvents(goodDi));
+        assertEquals(2, goodWrapper.getTotalAdverseEvents(goodDi));
+    }
+
+    @Test
+    public void testGetTotal(){
+        assertEquals(1, goodWrapper.getTotal());
+    }
+
+    @Test
+    public void testSkipping(){
+        goodWrapper.alterSearch(UDIWrapper.DeviceProperties.BRAND_NAME, "X", null, "10");
+        assertTrue(goodWrapper.getSearchExists());
     }
 }
