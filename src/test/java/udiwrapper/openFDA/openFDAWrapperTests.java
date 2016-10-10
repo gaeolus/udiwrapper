@@ -48,12 +48,6 @@ public class openFDAWrapperTests {
     }
 
     @Test
-    public void testAdverseEventTotal(){
-        // test it again
-        assertEquals(2, goodWrapper.getTotalAdverseEvents(goodDi));
-    }
-
-    @Test
     public void testGetTotal(){
         assertEquals(1, goodWrapper.getTotal());
     }
