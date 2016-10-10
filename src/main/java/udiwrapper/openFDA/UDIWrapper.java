@@ -106,6 +106,15 @@ public class UDIWrapper {
     private int total;
     private Map<String, Device> devices;
 
+    private final String SEARCH = "search";
+    private final String FDA_SCHEME = "https";
+    private final String FDA_HOST = "api.fda.gov";
+    private final String FDA_DEVICE_PATH = "device";
+    private final String FDA_UDI = "udi.json";
+    private final String API_KEY = "api_key";
+    private final String LIMIT = "limit";
+    private final String SKIP = "skip";
+
     private UDIWrapper(String apiKey,
                        DeviceProperties searchProperty,
                        String searchValue,
@@ -142,14 +151,6 @@ public class UDIWrapper {
     }
 
     private void performSearch(){
-        String SEARCH = "search";
-        String SKIP = "skip";
-        String LIMIT = "limit";
-        String FDA_SCHEME = "https";
-        String FDA_HOST = "api.fda.gov";
-        String FDA_DEVICE_PATH = "device";
-        String FDA_UDI = "udi.json";
-        String API_KEY = "api_key";
         HttpUrl searchUrl = new HttpUrl.Builder()
                 .scheme(FDA_SCHEME)
                 .host(FDA_HOST)

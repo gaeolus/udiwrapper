@@ -22,7 +22,31 @@ public class ProductCode {
     }
 
     void setOpenFDADeviceClass(String deviceClass){
-        this.openFDADeviceClass = deviceClass;
+        String parsedClass;
+        switch (deviceClass){
+            case "1":
+                parsedClass = "Class I";
+                break;
+            case "2":
+                parsedClass = "Class II";
+                break;
+            case "3":
+                parsedClass = "Class III";
+                break;
+            case "U":
+                parsedClass = "Unclassified";
+                break;
+            case "N":
+                parsedClass = "Not classified";
+                break;
+            case "F":
+                parsedClass = "HDE";
+                break;
+            default:
+                parsedClass = "No valid classification found.";
+                break;
+        }
+        this.openFDADeviceClass = parsedClass;
     }
 
     void setOpenFDARegulationNumber(String regulationNumber){

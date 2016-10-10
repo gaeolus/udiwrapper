@@ -206,7 +206,7 @@ public class openFDADeviceTests {
                 productCode.getOpenFDAName());
         assertEquals("General Hospital",
                 productCode.getOpenFDASpecialtyDescription());
-        assertEquals("2",
+        assertEquals("Class II",
                 productCode.getOpenFDADeviceClass());
         assertEquals("880.5970",
                 productCode.getOpenFDARegulationNumber());
