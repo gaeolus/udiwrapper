@@ -4,14 +4,14 @@ UDIWrapper is a Java library for wrapping the JSON returned from the [FDA's](htt
 If you have a medical device's DI (Device Identifier number), the API will return a trove of information about that Device. This wrapper provides easy access to that information.
 
 In version 1.0.0 you could only retrieve one device at a time. The UDIWrapper and Device object using the National Library of Medicine's API have been deprecated, but they are still available in the udiwrapper.nlm package.
-In version 2.0.1 you can search for any device property, and receive any number of devices. It's also possible to skip a number of devices before receiving devices.
+In version 2 you can search for any device property, and receive any number of devices. It's also possible to skip a number of devices before receiving devices.
 
 # Download
 This repo is on Maven Central. To use with Gradle, add this to your build.gradle
 ```gradle
 dependencies {
     ...
-    compile 'com.smithsocial:udiwrapper:2.0.1'
+    compile 'com.smithsocial:udiwrapper:2.0.2'
 }
 ```
 To use with Maven:
@@ -22,7 +22,7 @@ To use with Maven:
         <dependency>
             <groupId>com.smithsocial</groupId>
             <artifactId>udiwrapper</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
         </dependency>
     </dependencies>
 ```
@@ -60,7 +60,7 @@ if (mUDIWrapper.searchExists()){
 }
 
 ```
-With 2.0.1, you can search for any device property you want:
+With version 2, you can search for any device property you want:
 ```java
 
 UDIWrapper brandSearch = new UDIWrapper.Builder(myApiKey)
