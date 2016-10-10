@@ -101,8 +101,6 @@ public class UDIWrapper {
     private String searchValue;
     private String limitValue;
     private String skipValue;
-    private String adverseEventDeviceHelper;
-    private int totalAdverseEvents;
 
     private boolean searchExists;
     private int total;
@@ -113,7 +111,6 @@ public class UDIWrapper {
     private final String FDA_HOST = "api.fda.gov";
     private final String FDA_DEVICE_PATH = "device";
     private final String FDA_UDI = "udi.json";
-    private final String FDA_EVENT = "event.json";
     private final String API_KEY = "api_key";
     private final String LIMIT = "limit";
     private final String SKIP = "skip";
@@ -151,39 +148,6 @@ public class UDIWrapper {
         if (skipValue != null) this.skipValue = skipValue;
 
         performSearch();
-    }
-
-    private void performAdverseEventSearch(String deviceIdentifier){
-        totalAdverseEvents = 0;
-        //adverseEvents = new ArrayList<>();
-
-        HttpUrl searchUrl = new HttpUrl.Builder()
-                .scheme(FDA_SCHEME)
-                .host(FDA_HOST)
-                .addPathSegment(FDA_DEVICE_PATH)
-                .addPathSegment(FDA_EVENT)
-                .addQueryParameter(API_KEY, apiKey)
-                .addQueryParameter(SEARCH, "device.other_id_number.exact" + ":" + deviceIdentifier)
-                .build();
-
-
-        Request request = new Request.Builder().url(searchUrl).build();
-        OkHttpClient client = new OkHttpClient();
-
-        try {
-            Response response = client.newCall(request).execute();
-            if (response.code() == 200) {
-                JSONObject baseJSON = new JSONObject(response.body().string());
-                JSONObject metaObject = baseJSON.getJSONObject("meta");
-                JSONArray resultsArray = baseJSON.getJSONArray("results");
-                totalAdverseEvents = metaObject.getJSONObject("results").getInt("total");
-
-            }
-
-            response.body().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void performSearch(){
@@ -271,14 +235,6 @@ public class UDIWrapper {
      */
     public int getTotal(){
         return total;
-    }
-
-    public int getTotalAdverseEvents(String deviceId) {
-        if (this.adverseEventDeviceHelper == null || !this.adverseEventDeviceHelper.equals(deviceId)){
-            this.adverseEventDeviceHelper = deviceId;
-            performAdverseEventSearch(deviceId);
-        }
-        return totalAdverseEvents;
     }
 
     public static class Builder {
